@@ -196,9 +196,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </SidebarLinkGroup>
               {/* <!-- Menu Item Dashboard --> */}
 
-              {/* <!-- Menu Item Calendar --> */}
-
-              {/* <!-- Menu Item Calendar --> */}
+         
 
               {/* <!-- Menu Item Profile --> */}
               <li>
@@ -327,7 +325,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 (isActive && '!text-white')
                               }
                             >
-                              Project Information
+                              Contact us
                             </NavLink>
                           </li>
                         </ul>
