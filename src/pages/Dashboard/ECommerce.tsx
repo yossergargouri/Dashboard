@@ -7,12 +7,13 @@ import ChatCard from '../../components/Chat/ChatCard';
 import MapOne from '../../components/Maps/MapOne';
 import TableOne from '../../components/Tables/TableOne';
 import DefaultLayout from '../../layout/DefaultLayout';
+import TableTwo from '../../components/Tables/TableTwo';
 
 const ECommerce: React.FC = () => {
   return (
     <DefaultLayout>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Total views" total="$3.456K" rate="0.43%" levelUp>
+        <CardDataStats title="Total projects" total="..." >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -104,9 +105,9 @@ const ECommerce: React.FC = () => {
         <ChartThree />
         <MapOne />
         <div className="col-span-12 xl:col-span-8">
-          <TableOne />
+          <TableTwo />
         </div>
-        <ChatCard />
+       
       </div>
     </DefaultLayout>
   );

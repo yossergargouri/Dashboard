@@ -1,30 +1,30 @@
 import { Package } from '../../types/package';
 
 const packageData: Package[] = [
-  {
-    name: 'Free package',
-    price: 0.0,
-    invoiceDate: `Jan 13,2023`,
-    status: 'Paid',
-  },
-  {
-    name: 'Standard Package',
-    price: 59.0,
-    invoiceDate: `Jan 13,2023`,
-    status: 'Paid',
-  },
-  {
-    name: 'Business Package',
-    price: 99.0,
-    invoiceDate: `Jan 13,2023`,
-    status: 'Unpaid',
-  },
-  {
-    name: 'Standard Package',
-    price: 59.0,
-    invoiceDate: `Jan 13,2023`,
-    status: 'Pending',
-  },
+  // {
+  //   name: 'Free package',
+  //   price: 0.0,
+  //   invoiceDate: `Jan 13,2023`,
+  //   status: 'Paid',
+  // },
+  // {
+  //   name: 'Standard Package',
+  //   price: 59.0,
+  //   invoiceDate: `Jan 13,2023`,
+  //   status: 'Paid',
+  // },
+  // {
+  //   name: 'Business Package',
+  //   price: 99.0,
+  //   invoiceDate: `Jan 13,2023`,
+  //   status: 'Unpaid',
+  // },
+  // {
+  //   name: 'Standard Package',
+  //   price: 59.0,
+  //   invoiceDate: `Jan 13,2023`,
+  //   status: 'Pending',
+  // },
 ];
 
 const TableThree = () => {
@@ -35,7 +35,7 @@ const TableThree = () => {
           <thead>
             <tr className="bg-gray-2 text-left dark:bg-meta-4">
               <th className="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                Package
+                References
               </th>
               
             </tr>
