@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 
 
 const TableOne = () => {
+
   const [tableoneData, setTableOneData] = useState<{ id: string, name: string,path:string, type: string, version: string }[]>([]);  
+
     useEffect(() => {
       fetch('http://localhost:5245/CsprojFile')
         .then((response) => {
@@ -30,12 +32,12 @@ const TableOne = () => {
         <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
           <div className="p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-            Id 
+            ID 
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Path
+              Name
             </h5>
           </div>
           { <div className="p-2.5 text-center xl:p-5">
@@ -66,7 +68,8 @@ const TableOne = () => {
       </div>
 
       <div className="flex items-center justify-center p-2.5 xl:p-5">
-        <p className="text-black dark:text-white">{csproj.path}K</p>
+        <p className="text-black dark:text-white">{csproj.name}K</p>
+
       </div>
 
       <div className="flex items-center justify-center p-2.5 xl:p-5">
