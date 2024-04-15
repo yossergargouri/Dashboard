@@ -16,6 +16,7 @@ import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import Result from './pages/Analyse';
+import Analyse from './pages/Analyse';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -50,6 +51,15 @@ function App() {
             <>
               <PageTitle title="Profile" />
               <Profile />
+            </>
+          }
+        />
+         <Route
+          path="/Analyse"
+          element={
+            <>
+              <PageTitle title="Analyse" />
+              <Analyse/>
             </>
           }
         />

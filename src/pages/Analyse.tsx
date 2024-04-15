@@ -6,7 +6,7 @@ import TableTwo from '../components/Tables/TableTwo';
 import TableFour from '../components/Tables/TableFour';
 import DefaultLayout from '../layout/DefaultLayout';
 
-const Result = () => {
+const Analyse = () => {
   return (
     <DefaultLayout>
          <Breadcrumb pageName="Tables" />
@@ -23,4 +23,4 @@ const Result = () => {
 
 
 
-export default Result;
+export default Analyse;
