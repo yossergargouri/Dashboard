@@ -64,24 +64,20 @@ const TableOne = () => {
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Path
+             version
             </h5>
           </div>
-          {/* <div className="p-2.5 text-center xl:p-5">
+          { <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Revenues
+              Type
             </h5>
-          </div> */}
-          {/* <div className="hidden p-2.5 text-center sm:block xl:p-5">
+          </div> }
+          { <div className="hidden p-2.5 text-center sm:block xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Sales
+              Path
             </h5>
-          </div> */}
-          {/* <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Conversion
-            </h5>
-          </div> */}
+          </div> }
+      
         </div>
 
         {brandData.map((brand, key) => (
