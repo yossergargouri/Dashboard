@@ -7,7 +7,6 @@ import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
 
 import Chart from './pages/Chart';
-import ECommerce from './pages/Dashboard/ECommerce';
 import FormElements from './pages/Form/FormElements';
 import FormLayout from './pages/Form/FormLayout';
 import Profile from './pages/Profile';
@@ -17,6 +16,7 @@ import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import Result from './pages/Analyse';
 import Analyse from './pages/Analyse';
+import Netshift from './pages/Dashboard/Netshift';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -40,7 +40,7 @@ function App() {
           element={
             <>
               <PageTitle title="Netshift Advisor " />
-              <ECommerce />
+              <Netshift />
             </>
           }
         />

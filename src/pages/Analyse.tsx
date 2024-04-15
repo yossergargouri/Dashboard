@@ -4,6 +4,7 @@ import TableOne from '../components/Tables/TableOne';
 import TableThree from '../components/Tables/TableThree';
 import TableTwo from '../components/Tables/TableTwo';
 import TableFour from '../components/Tables/TableFour';
+import TableFive from '../components/Tables/TableFive';
 import DefaultLayout from '../layout/DefaultLayout';
 
 const Analyse = () => {
@@ -16,6 +17,7 @@ const Analyse = () => {
   <TableTwo />
   <TableThree />
   <TableFour />
+  <TableFive />
 </div>
     </DefaultLayout>
   )
