@@ -7,14 +7,13 @@ import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
 
 import Chart from './pages/Chart';
-import FormElements from './pages/Form/FormElements';
-import FormLayout from './pages/Form/FormLayout';
+import Upload from './pages/Form/Upload';
+import Contact from './pages/Form/Contact';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
-import Result from './pages/Analyse';
 import Analyse from './pages/Analyse';
 import Netshift from './pages/Dashboard/Netshift';
 
@@ -63,30 +62,22 @@ function App() {
             </>
           }
         />
-         <Route
-          path="/result"
+        
+        <Route
+          path="/Upload"
           element={
             <>
-              <PageTitle title="Profile" />
-              <Result />
+              <PageTitle title="Upload " />
+              <Upload />
             </>
           }
         />
         <Route
-          path="/forms/form-elements"
-          element={
-            <>
-              <PageTitle title="Form Elements " />
-              <FormElements />
-            </>
-          }
-        />
-        <Route
-          path="/forms/form-layout"
+          path="/Contact"
           element={
             <>
               <PageTitle title="Contact " />
-              <FormLayout />
+              <Contact/>
             </>
           }
         />
