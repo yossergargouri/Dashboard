@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
+const Tableprojectref = () => {
+  const [tablefourData, setTableFourData] = useState<{ id: string, name: string, path: string }[]>([]);
 
-
-
-
-const TableSix = () => {
-  const [tablesixData, setTableSixData] = useState<{ id: string, name: string, path: string }[]>([]);
   useEffect(() => {
-    fetch('http://localhost:5245/api/SlnFiles')
+    fetch('http://localhost:5245/Reference')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -15,7 +12,7 @@ const TableSix = () => {
       })
       .then((data) => {
         console.log('Data received:', data); // Log the received data
-        setTableSixData(data);
+        setTableFourData(data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error); // Log any errors
@@ -28,20 +25,22 @@ const TableSix = () => {
           <thead>
             <tr className="bg-gray-2 text-left dark:bg-meta-4">
               <th className="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">
-                Your Project List
+                Project references
               </th>
               <th className="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">
+                Path
+              </th>
+              <th className="py-4 px-4 font-medium text-black dark:text-white">
+                Version
+              </th>
+              <th className="py-4 px-4 font-medium text-black dark:text-white">
                 Status
-              </th>
-              <th className="py-4 px-4 font-medium text-black dark:text-white">
-              </th>
-              <th className="py-4 px-4 font-medium text-black dark:text-white">
               </th>
               
             </tr>
           </thead>
           <tbody>
-            {tablesixData.map((packageItem, key) => (
+            {tablefourData.map((packageItem, key) => (
               <tr key={key}>
                 <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">
@@ -50,8 +49,8 @@ const TableSix = () => {
                   
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                   <p className="text-black dark:text-white">utfgv
-                    
+                   <p className="text-black dark:text-white">
+                    {/* {packageItem.invoiceDate} */}
                   </p> 
                 </td>
               </tr>
@@ -63,4 +62,4 @@ const TableSix = () => {
   );
 };
 
-export default TableSix;
+export default Tableprojectref;

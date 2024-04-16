@@ -11,7 +11,7 @@ import Upload from './pages/Form/Upload';
 import Contact from './pages/Form/Contact';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
-import Tables from './pages/Tables';
+import Details from './pages/details';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import Analyse from './pages/Analyse';
@@ -92,11 +92,11 @@ function App() {
           }
         />
         <Route
-          path="/tables"
+          path="/Details"
           element={
             <>
-              <PageTitle title="Tables" />
-              <Tables />
+              <PageTitle title="Details" />
+              <Details />
             </>
           }
         />

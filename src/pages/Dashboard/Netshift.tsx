@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import DefaultLayout from '../../layout/DefaultLayout';
-import TableSix from '../../components/Tables/TablesSix';
+import TableSln from '../../components/Tables/TablesSln';
 
 
 
@@ -11,7 +11,7 @@ const Netshift: React.FC = () => {
     <DefaultLayout>
     <div>
 
-    <TableSix/>
+    <TableSln/>
     <br></br>
     <br></br>
     
