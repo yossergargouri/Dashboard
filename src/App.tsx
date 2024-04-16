@@ -16,6 +16,7 @@ import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import Analyse from './pages/Analyse';
 import Netshift from './pages/Dashboard/Netshift';
+import NetshiftAdm from './pages/Dashboard/NetshiftAdm';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -50,6 +51,15 @@ function App() {
             <>
               <PageTitle title="Profile" />
               <Profile />
+            </>
+          }
+        />
+          <Route
+          path="/NetshiftAdm"
+          element={
+            <>
+              <PageTitle title="NetshiftAdm" />
+              <NetshiftAdm/>
             </>
           }
         />
