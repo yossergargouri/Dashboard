@@ -105,16 +105,16 @@ const DropdownMessage = () => {
               to="/messages"
             >
               <div className="h-12.5 w-12.5 rounded-full">
-                <img src={UserTwo} alt="User" />
+                <img src="" alt="User" />
               </div>
 
-              <div>
+              {/* <div>
                 <h6 className="text-sm font-medium text-black dark:text-white">
                   Mariya Desoja
                 </h6>
                 <p className="text-sm">I like your confidence 💪</p>
                 <p className="text-xs">2min ago</p>
-              </div>
+              </div> */}
             </Link>
           </li>
           <li>
@@ -123,16 +123,16 @@ const DropdownMessage = () => {
               to="/messages"
             >
               <div className="h-12.5 w-12.5 rounded-full">
-                <img src={UserOne} alt="User" />
+                <img src="" alt="User" />
               </div>
 
-              <div>
+              {/* <div>
                 <h6 className="text-sm font-medium text-black dark:text-white">
                   Robert Jhon
                 </h6>
                 <p className="text-sm">Can you share your offer?</p>
                 <p className="text-xs">10min ago</p>
-              </div>
+              </div> */}
             </Link>
           </li>
           <li>
@@ -141,16 +141,16 @@ const DropdownMessage = () => {
               to="/messages"
             >
               <div className="h-12.5 w-12.5 rounded-full">
-                <img src={UserThree} alt="User" />
+                <img src="" alt="User" />
               </div>
 
-              <div>
+              {/* <div>
                 <h6 className="text-sm font-medium text-black dark:text-white">
                   Henry Dholi
                 </h6>
                 <p className="text-sm">I cam across your profile and...</p>
                 <p className="text-xs">1day ago</p>
-              </div>
+              </div> */}
             </Link>
           </li>
           <li>
@@ -159,16 +159,16 @@ const DropdownMessage = () => {
               to="/messages"
             >
               <div className="h-12.5 w-12.5 rounded-full">
-                <img src={UserFour} alt="User" />
+                <img src="" alt="User" />
               </div>
 
-              <div>
+              {/* <div>
                 <h6 className="text-sm font-medium text-black dark:text-white">
                   Cody Fisher
                 </h6>
                 <p className="text-sm">I’m waiting for you response!</p>
                 <p className="text-xs">5days ago</p>
-              </div>
+              </div> */}
             </Link>
           </li>
           <li>
@@ -177,16 +177,16 @@ const DropdownMessage = () => {
               to="/messages"
             >
               <div className="h-12.5 w-12.5 rounded-full">
-                <img src={UserTwo} alt="User" />
+                <img src="" alt="User" />
               </div>
 
-              <div>
+              {/* <div>
                 <h6 className="text-sm font-medium text-black dark:text-white">
                   Mariya Desoja
                 </h6>
                 <p className="text-sm">I like your confidence 💪</p>
                 <p className="text-xs">2min ago</p>
-              </div>
+              </div> */}
             </Link>
           </li>
         </ul>
