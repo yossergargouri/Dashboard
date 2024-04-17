@@ -11,7 +11,7 @@ import Upload from './pages/Form/Upload';
 import Contact from './pages/Form/Contact';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
-import Details from './pages/details';
+import Details from './pages/Details';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import Analyse from './pages/Analyse';
