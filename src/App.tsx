@@ -11,12 +11,14 @@ import Upload from './pages/Form/Upload';
 import Contact from './pages/Form/Contact';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
-import Details from './pages/details';
+import Details from './pages/Details';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import Analyse from './pages/Analyse';
 import Netshift from './pages/Dashboard/Netshift';
-import NetshiftAdm from './pages/Dashboard/NetshiftAdm';
+import NetshiftAdm from './pages/Dashboard/NetshiftAdm'
+import Admprofile from './pages/Admprofile';
+import Usersprofile from "./components/Chat/Usersprofile";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -51,6 +53,24 @@ function App() {
             <>
               <PageTitle title="Profile" />
               <Profile />
+            </>
+          }
+        />
+        <Route
+          path="/Admprofile"
+          element={
+            <>
+              <PageTitle title="AdmProfile" />
+              <Admprofile />
+            </>
+          }
+        />
+          <Route
+          path="/Usersprofile"
+          element={
+            <>
+              <PageTitle title="UsersProfile" />
+              <Usersprofile />
             </>
           }
         />
