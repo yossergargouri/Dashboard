@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-import LogoDark from '../../images/logo/logo-dark.svg';
+import Logo3 from '../../images/logo/logo3.svg';
 import Logo from '../../images/logo/logo.svg';
-import DefaultLayout from '../../layout/DefaultLayout';
+
 
 const SignIn: React.FC = () => {
   return (
@@ -12,13 +11,14 @@ const SignIn: React.FC = () => {
 
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
-          <div className="hidden w-full xl:block xl:w-1/2">
+          <div className=" hidden w-full xl:block xl:w-1/2">
+            
             <div className="py-17.5 px-26 text-center">
               <Link className="mb-5.5 inline-block" to="/">
                 <img className="hidden dark:block" src={Logo} alt="Logo" />
-                <img className="dark:hidden" src={LogoDark} alt="Logo" />
+                <img className="dark:hidden" src={Logo3} alt="Logo" />
               </Link>
-
+            
               <p className="2xl:px-20">
                 {/* ...............;;;;; */}
               </p>
