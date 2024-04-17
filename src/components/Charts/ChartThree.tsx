@@ -75,7 +75,7 @@ const ChartThree: React.FC = () => {
 
           Monthly
               
-    <div
+       
            
           
           </div>
