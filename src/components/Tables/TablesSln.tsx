@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
-
-
-
 const TableSln = () => {
   const [tablesixData, setTableSixData] = useState<{ id: string, name: string, path: string }[]>([]);
   useEffect(() => {
@@ -62,7 +58,7 @@ const TableSln = () => {
                   
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                   <p className="text-black dark:text-white">utfgv
+                   <p className="text-black dark:text-white">
                     
                   </p> 
                 </td>
