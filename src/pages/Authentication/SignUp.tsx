@@ -1,10 +1,31 @@
-import React from 'react';
+import React, {  useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo3 from '../../images/logo/logo3.svg';
 import Logo from '../../images/logo/logo.svg';
+import axios from 'axios';
+
 
 
 const SignUp: React.FC = () => {
+  const [formData, setFormData] = useState({
+    Username: '',
+    Email: '',
+    PasswordHash: '',
+  });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5245/api/auth/register', formData);
+      console.log('Inscription réussie ! Réponse du serveur :', response.data);
+      // Ajoutez ici la logique de redirection ou de notification d'inscription réussie
+    } catch (error) {
+      console.error('Erreur lors de l\'inscription:', error);
+      // Ajoutez ici la logique de gestion des erreurs
+    }
+  };  
   return (
     <>
   
@@ -149,7 +170,7 @@ const SignUp: React.FC = () => {
                 Sign Up to  Netshift Advisor
               </h2>
 
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                      User Name
@@ -159,6 +180,9 @@ const SignUp: React.FC = () => {
                       type="text"
                       placeholder="Enter your name"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      name='Username'
+                      value={formData.Username}
+                      onChange={handleChange}
                     />
 
                     <span className="absolute right-4 top-4">
@@ -190,11 +214,15 @@ const SignUp: React.FC = () => {
                     Email
                   </label>
                   <div className="relative">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                    />
+                 <input
+                          type="email"
+                         placeholder="Enter your email"
+                         className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                         name='Email'
+                          value={formData.Email}
+                        onChange={handleChange}
+    />
+  
 
                     <span className="absolute right-4 top-4">
                       <svg
@@ -225,6 +253,9 @@ const SignUp: React.FC = () => {
                       type="password"
                       placeholder="Enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      name='PasswordHash'
+                      value={formData.PasswordHash}
+                      onChange={handleChange}
                     />
 
                     <span className="absolute right-4 top-4">

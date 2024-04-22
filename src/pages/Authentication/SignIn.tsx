@@ -1,10 +1,51 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, SyntheticEvent } from 'react';
+import { Link ,useNavigate } from 'react-router-dom';
 import Logo3 from '../../images/logo/logo3.svg';
 import Logo from '../../images/logo/logo.svg';
+import axios from 'axios';
 
-
+  
 const SignIn: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  async function handleFormSubmit(event: SyntheticEvent<HTMLFormElement>) {
+    event.preventDefault();
+  
+    const data = {
+      email,
+      password,
+    };
+  
+    try {
+      const response = await axios.post('http://localhost:5245/api/auth/login', data);
+  
+      // Si la requête est réussie, vous pouvez récupérer le token de la réponse
+      const token = response.data.token;
+  
+      // Stockez le token dans localStorage ou dans un état global selon vos besoins
+      localStorage.setItem('token', token);
+
+      navigate('/');
+
+      // Exécuter la fonction onSuccess pour indiquer que la connexion est réussie
+  
+    } catch (error: any) {
+      console.error('Login error:', error);
+  
+      if (error.response?.status === 400) {
+        // Gestion spécifique des erreurs pour le code d'erreur 400 Bad Request
+        setErrorMessage('Identifiants invalides ou champs manquants. Veuillez vérifier votre email et votre mot de passe.');
+      } else {
+        // Gérer les autres erreurs
+        setErrorMessage('Une erreur s\'est produite lors de la connexion. Veuillez réessayer plus tard.');
+      }
+    }
+  }
+  
+
   return (
 <>
      
@@ -14,10 +55,9 @@ const SignIn: React.FC = () => {
           <div className=" hidden w-full xl:block xl:w-1/2">
             
             <div className="py-17.5 px-26 text-center">
-              <Link className="mb-5.5 inline-block" to="/">
                 <img className="hidden dark:block" src={Logo} alt="Logo" />
                 <img className="dark:hidden" src={Logo3} alt="Logo" />
-              </Link>
+              
             
               <p className="2xl:px-20">
                 {/* ...............;;;;; */}
@@ -155,16 +195,19 @@ const SignIn: React.FC = () => {
                 Sign In toNetshift Advisor
               </h2>
 
-              <form>
+              <form onSubmit={handleFormSubmit}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Email
-                  </label>
+                    User name
+                  </label>  
                   <div className="relative">
                     <input
                       type="email"
                       placeholder="Enter your email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      name="email"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -189,14 +232,17 @@ const SignIn: React.FC = () => {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Re-type Password
+                       Password
                   </label>
                   <div className="relative">
                     <input
                       type="password"
                       placeholder="6+ Characters, 1 Capital letter"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                    />
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      name="password"
+                      />
 
                     <span className="absolute right-4 top-4">
                       <svg
