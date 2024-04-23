@@ -1,8 +1,9 @@
-import React, { useState, SyntheticEvent } from 'react';
+import React, { useState, SyntheticEvent,useEffect } from 'react';
 import { Link ,useNavigate } from 'react-router-dom';
 import Logo3 from '../../images/logo/logo3.svg';
 import Logo from '../../images/logo/logo.svg';
 import axios from 'axios';
+import { accountService } from '../../services/account.service';
 
   
 const SignIn: React.FC = () => {
@@ -10,7 +11,12 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    // Redirige l'utilisateur vers la page principale s'il est déjà connecté
+    if (accountService.isLogged()) {
+      navigate('/');
+    }
+  }, [navigate]);
   async function handleFormSubmit(event: SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
   
@@ -23,10 +29,8 @@ const SignIn: React.FC = () => {
       const response = await axios.post('http://localhost:5245/api/auth/login', data);
   
       // Si la requête est réussie, vous pouvez récupérer le token de la réponse
-      const token = response.data.token;
+      accountService.saveToken(response.data.token);
   
-      // Stockez le token dans localStorage ou dans un état global selon vos besoins
-      localStorage.setItem('token', token);
 
       navigate('/');
 
