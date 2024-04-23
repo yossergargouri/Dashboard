@@ -21,6 +21,7 @@ import NetshiftAdm from './pages/Dashboard/NetshiftAdm';
 import Admprofile from './pages/Admprofile';
 import Usersprofile from './components/Chat/Usersprofile';
 import Updateuser from './pages/Updateuser';
+import AuthProtected from './pages/Authentication/authprotected';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -46,7 +47,9 @@ function App() {
               element={
                 <>
                   <PageTitle title="Netshift Advisor" />
+                  <AuthProtected>
                   <Netshift />
+                  </AuthProtected>
                 </>
               }
             />
@@ -185,6 +188,7 @@ function App() {
           element={
             <>
               <PageTitle title="Signin" />
+              
               <SignIn />
             </>
           }
