@@ -1,5 +1,5 @@
 import React, {  useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo3 from '../../images/logo/logo3.svg';
 import Logo from '../../images/logo/logo.svg';
 import axios from 'axios';
@@ -11,16 +11,26 @@ const SignUp: React.FC = () => {
     Username: '',
     Email: '',
     PasswordHash: '',
+    RetypePassword:''
   });
+  const navigate = useNavigate();
+
+  const [passwordError, setPasswordError] = useState('');
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (formData.PasswordHash !== formData.RetypePassword) {
+      setPasswordError('Passwords do not match');
+      return;
+    }
     try {
       const response = await axios.post('http://localhost:5245/api/auth/register', formData);
       console.log('Inscription réussie ! Réponse du serveur :', response.data);
       // Ajoutez ici la logique de redirection ou de notification d'inscription réussie
+      navigate('/auth/signin');
+
     } catch (error) {
       console.error('Erreur lors de l\'inscription:', error);
       // Ajoutez ici la logique de gestion des erreurs
@@ -288,10 +298,13 @@ const SignUp: React.FC = () => {
                   </label>
                   <div className="relative">
                     <input
-                      type="password"
-                      placeholder="Re-enter your password"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                    />
+                       type="password"
+                       placeholder="Enter your password"
+                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                       name='RetypePassword'
+                       value={formData.RetypePassword}
+                       onChange={handleChange}
+                       ></input>
 
                     <span className="absolute right-4 top-4">
                       <svg
@@ -325,7 +338,7 @@ const SignUp: React.FC = () => {
                   />
                 </div>
 
-             
+                {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
 
                 <div className="mt-6 text-center">
                   <p>
