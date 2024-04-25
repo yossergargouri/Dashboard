@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 const TableSln = () => {
-  const [tablesixData, setTableSixData] = useState<{ id: string, name: string, path: string }[]>([]);
+  const [tablesixData, setTableSixData] = useState<{ id: string, name: string, version: string }[]>([]);
   useEffect(() => {
     fetch('http://localhost:5245/api/SlnFiles')
       .then((response) => {
