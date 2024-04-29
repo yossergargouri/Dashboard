@@ -1,6 +1,4 @@
 
-
-
 let saveToken = (token: string, userId: number) => {
     localStorage.setItem('token', token);
 
@@ -37,4 +35,5 @@ export const accountService = {
     isLogged,
     getUserId 
 }
+
 

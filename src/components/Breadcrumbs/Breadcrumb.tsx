@@ -9,7 +9,7 @@ const Breadcrumb = ({ pageName }: BreadcrumbProps) => {
         {pageName}
       </h2>
 
-  
+
     </div>
   );
 };

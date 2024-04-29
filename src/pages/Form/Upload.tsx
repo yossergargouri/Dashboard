@@ -3,13 +3,15 @@ import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../../layout/DefaultLayout';
 import axios from 'axios';
 import { accountService } from '../../services/account.service';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const FormElements = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [Name, setProjectName] = useState<string>('');
   const [Version, setProjectVersion] = useState<string>('');
   const [UserId, setUserId] = useState<string>('');
-
+  const navigate = useNavigate(); 
   useEffect(() => {
     const fetchUserId = async () => {
       const loggedInUserId = await accountService.getUserId();
@@ -45,6 +47,8 @@ const FormElements = () => {
       });
 
       console.log('Réponse du serveur :', response.data);
+            navigate('/');
+
     } catch (error) {
       console.error('Erreur lors de l\'envoi du fichier :', error);
     }
@@ -109,12 +113,12 @@ const FormElements = () => {
                     />
                   </div>
                   <div className="flex justify-end gap-4.5">
-                    <button
-                      className="flex justify-center rounded border border-stroke py-2 px-6 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
-                      type="button"
-                    >
-                      Cancel
-                    </button>
+                  <Link
+              to="/"
+              className="flex justify-center rounded border border-stroke py-2 px-6 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
+            >
+              cancel 
+            </Link>
                     <button
                       className="flex justify-center rounded bg-primary py-2 px-6 font-medium text-gray hover:bg-opacity-90"
                       type="button"

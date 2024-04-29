@@ -28,11 +28,13 @@ const SignIn: React.FC = () => {
   
     try {
       const response = await axios.post('http://localhost:5245/api/auth/login', data);
+
       console.log(response.data.userId);
 
 
       
       accountService.saveToken(response.data.token, response.data.userId); // Passer également l'ID de l'utilisateur
+
 
 
 

@@ -142,24 +142,7 @@ function App() {
                 </>
               }
             />
-            <Route
-              path="/chart"
-              element={
-                <>
-                  <PageTitle title="Basic Chart" />
-                  <Chart />
-                </>
-              }
-            />
-            <Route
-              path="/ui/alerts"
-              element={
-                <>
-                  <PageTitle title="Alerts " />
-                  <Alerts />
-                </>
-              }
-            />
+         
             <Route
               path="/ui/buttons"
               element={
