@@ -30,9 +30,11 @@ const SignIn: React.FC = () => {
       const response = await axios.post('http://localhost:5245/api/auth/login', data);
       console.log(response.data.userId);
   
-      // Si la requête est réussie, vous pouvez récupérer le token de la réponse
-      accountService.saveToken(response.data.token,response.data.userId);
-  
+
+      
+      accountService.saveToken(response.data.token, response.data.userId); // Passer également l'ID de l'utilisateur
+
+
 
       navigate('/');
 
@@ -280,6 +282,13 @@ const SignIn: React.FC = () => {
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
                   />
                 </div>
+
+
+
+                {errorMessage &&<AlertFailed header={"Error"} message= {errorMessage}/>}
+                
+                {/* {errorMessage && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>} */}
+
 
               
 

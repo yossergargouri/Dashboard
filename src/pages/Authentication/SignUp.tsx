@@ -30,8 +30,6 @@ const SignUp: React.FC = () => {
       console.log('Inscription réussie ! Réponse du serveur :', response.data);
       // Ajoutez ici la logique de redirection ou de notification d'inscription réussie
 
-      
-
       navigate('/auth/signin');
 
     } catch (error) {
