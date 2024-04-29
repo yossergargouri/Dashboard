@@ -4,6 +4,7 @@ import Logo3 from '../../images/logo/logo3.svg';
 import Logo from '../../images/logo/logo.svg';
 import axios from 'axios';
 import { accountService } from '../../services/account.service';
+
 import { AlertFailed } from '../UiElements/Alerts';
   
 const SignIn: React.FC = () => {
@@ -29,10 +30,10 @@ const SignIn: React.FC = () => {
       const response = await axios.post('http://localhost:5245/api/auth/login', data);
       console.log(response.data.userId);
   
-      // Si la requête est réussie, vous pouvez récupérer le token de la réponse
-=
+
       
       accountService.saveToken(response.data.token, response.data.userId); // Passer également l'ID de l'utilisateur
+
 
 
       navigate('/');
@@ -283,9 +284,11 @@ const SignIn: React.FC = () => {
                 </div>
 
 
+
                 {errorMessage &&<AlertFailed header={"Error"} message= {errorMessage}/>}
                 
                 {/* {errorMessage && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>} */}
+
 
               
 
