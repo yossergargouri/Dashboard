@@ -11,7 +11,7 @@ const NetshiftAdm: React.FC = () => {
     <DefaultLayoutAdm>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
         
-      <CardDataStats title="Total Users" total="3.456" >
+      <CardDataStats title="Total Users" total="0" >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -34,10 +34,10 @@ const NetshiftAdm: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Solutions" total="$45,2K">
+        <CardDataStats title="Total Solutions" total="0">
         <img src={fiLE} width={20} height={20} alt="Logo" />
         </CardDataStats>
-        <CardDataStats title="Total connected users " total="456" >
+        <CardDataStats title="Total connected users " total="0" >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
