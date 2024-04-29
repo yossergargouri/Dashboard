@@ -49,7 +49,7 @@ const SignIn: React.FC = () => {
         setErrorMessage('Identifiants invalides ou champs manquants. Veuillez vérifier votre email et votre mot de passe.');
       } else {
         // Gérer les autres erreurs
-        setErrorMessage('Une erreur s\'est produite lors de la connexion. Veuillez réessayer plus tard.');
+        setErrorMessage('Une erreur s\'est produite vérifier vos cordonnées . Veuillez réessayer plus tard.');
       }
     }
   }
