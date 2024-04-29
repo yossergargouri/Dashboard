@@ -1,7 +1,8 @@
-let saveToken = (token: string, userId: string) => {
+let saveToken = (token: string, userId: number) => {
     localStorage.setItem('token', token);
-    localStorage.setItem('userId', userId); 
+    localStorage.setItem('userId', userId.toString()); 
 }
+
 
 let logout =() => {
     localStorage.removeItem('token');
@@ -15,12 +16,12 @@ let isLogged = () => {
 }
 
 let getUserId = () => {
-    return localStorage.getItem('userId'); // Ajoutez cette fonction pour récupérer l'ID de l'utilisateur
+    return localStorage.getItem('userId');
 }
 
 export const accountService = {
     saveToken,
     logout,
     isLogged,
-    getUserId // Ajoutez cette fonction à l'export
+    getUserId 
 }

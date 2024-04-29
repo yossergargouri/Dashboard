@@ -38,7 +38,7 @@ const FormElements = () => {
     formData.append('userId', UserId);
 
     try {
-      const response = await axios.post('http://localhost:5245/api/SlnFile', formData, {
+      const response = await axios.post('http://localhost:5245/api/SlnFiles', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
