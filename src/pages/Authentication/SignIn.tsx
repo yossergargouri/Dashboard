@@ -30,7 +30,7 @@ const SignIn: React.FC = () => {
       console.log(response.data.userId);
   
       // Si la requête est réussie, vous pouvez récupérer le token de la réponse
-=
+
       
       accountService.saveToken(response.data.token, response.data.userId); // Passer également l'ID de l'utilisateur
 
