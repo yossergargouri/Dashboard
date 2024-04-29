@@ -11,8 +11,14 @@ const Tableprojectref = () => {
         return response.json();
       })
       .then((data) => {
-        console.log('Data received:', data); // Log the received data
-        setTableFourData(data);
+        console.log('Data received:', data);
+        // Extracting the relevant data from $values array
+        const extractedData = data.$values.map((item: any) => ({
+          id: item.id,
+          name: item.name,
+          version: item.version
+        }));
+        setTableFourData(extractedData);
       })
       .catch((error) => {
         console.error('Error fetching data:', error); // Log any errors
