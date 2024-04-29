@@ -20,6 +20,7 @@ const TableSln: React.FC = () => {
 
     fetchUserId();
   }, []);
+
   useEffect(() => {
     fetch(`http://localhost:5245/api/SlnFiles?userId=${userId}`)
     .then((response) => {

@@ -29,11 +29,13 @@ const SignUp: React.FC = () => {
       const response = await axios.post('http://localhost:5245/api/auth/register', formData);
       console.log('Inscription réussie ! Réponse du serveur :', response.data);
       // Ajoutez ici la logique de redirection ou de notification d'inscription réussie
+      
       navigate('/auth/signin');
 
     } catch (error) {
       console.error('Erreur lors de l\'inscription:', error);
       // Ajoutez ici la logique de gestion des erreurs
+      alert(' vous avez déja inscrit, connecter vous')
     }
   };  
   return (

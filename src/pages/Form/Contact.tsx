@@ -2,6 +2,8 @@ import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 
 import DefaultLayout from '../../layout/DefaultLayout';
 
+
+
 const FormLayout = () => {
   return (
     <DefaultLayout>
@@ -87,6 +89,26 @@ const FormLayout = () => {
 
         <div className="flex flex-col gap-9">
 
+        <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+            <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+              <h3 className="font-medium text-black dark:text-white">
+                Messages
+              </h3>
+            </div>
+            <div
+
+      >
+
+        <ul className="flex h-auto flex-col overflow-y-auto">
+
+        <li>
+
+                                   
+        </li>
+
+        </ul>
+      </div>
+          </div>
         </div>
       </div>
     </DefaultLayout>
