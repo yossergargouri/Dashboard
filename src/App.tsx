@@ -8,7 +8,6 @@ import AdmsignIn from './pages/Authentication/Admsignin';
 import Chart from './pages/Chart';
 import Upload from './pages/Form/Upload';
 import Contact from './pages/Form/Contact';
-import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Admsettings from './pages/Admsettings';
 import Details from './pages/Details';
@@ -52,15 +51,7 @@ function App() {
                 </>
               }
             />
-            <Route
-              path="/profile"
-              element={
-                <>
-                  <PageTitle title="Profile" />
-                  <Profile />
-                </>
-              }
-            />
+          
             <Route
               path="/Admprofile"
               element={
