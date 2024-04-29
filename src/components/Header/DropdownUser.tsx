@@ -1,31 +1,64 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link , useNavigate} from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import UserOne from '../../images/user/user-01.png';
 import axios from 'axios';
+import { accountService } from '../../services/account.service';
 
-const DropdownUser:  React.FC = () => {
+const DropdownUser: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const navigate = useNavigate(); // Utiliser useNavigate pour la navigation
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState<string>('');
+  const [Username, setUsername] = useState<string>('');
 
-  const trigger = useRef<any>(null);
-  const dropdown = useRef<any>(null);
+  useEffect(() => {
+    const fetchUserId = async () => {
+      const loggedInUserId = await accountService.getUserId();
+      setUserId(loggedInUserId || '');
+    };
+
+    fetchUserId();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5245/User/${userId}`);
+
+        if (response.status === 200) {
+          const userData = response.data;
+          setUsername(userData.username || '');
+        } else {
+          throw new Error('Failed to fetch user data');
+        }
+      } catch (error) {
+        console.error('Fetch user data error:', error);
+      }
+    };
+
+    if (userId) {
+      fetchUserData();
+    }
+  }, [userId]);
+
+  const trigger = useRef<HTMLAnchorElement>(null);
+  const dropdown = useRef<HTMLDivElement>(null);
 
   const logout = async () => {
     try {
       const token = localStorage.getItem('token');
-  
+
       if (!token) {
         throw new Error('Token not found');
       }
-  
+
       const response = await axios.post('http://localhost:5245/api/auth/logout', {
         token: token
       });
-  
+
       if (response.status !== 200) {
         throw new Error('Logout failed');
       }
-  
+
       localStorage.removeItem('token');
       navigate('/auth/signin');
       window.location.reload();
@@ -33,22 +66,23 @@ const DropdownUser:  React.FC = () => {
       console.error('Logout error:', error);
     }
   };
-  
 
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!dropdown.current) return;
-      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
+      if (!dropdownOpen || !target || !(target instanceof Node) || dropdown.current.contains(target as Node) || (trigger.current && trigger.current.contains(target as Node))) return;
       setDropdownOpen(false);
     };
+    
     document.addEventListener('click', clickHandler);
     return () => document.removeEventListener('click', clickHandler);
   }, [dropdownOpen]);
 
   useEffect(() => {
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
-      if (!dropdownOpen || keyCode !== 27) return;
-      setDropdownOpen(false);
+      if (dropdownOpen && keyCode === 27) {
+        setDropdownOpen(false);
+      }
     };
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
@@ -64,9 +98,9 @@ const DropdownUser:  React.FC = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            {Username}
           </span>
-          <span className="block text-xs">UX Designer</span>
+          {/* <span className="block text-xs">UX Designer</span> */}
         </span>
 
         <span className="h-12 w-12 rounded-full">
@@ -92,8 +126,6 @@ const DropdownUser:  React.FC = () => {
 
       <div
         ref={dropdown}
-        onFocus={() => setDropdownOpen(true)}
-        onBlur={() => setDropdownOpen(false)}
         className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${
           dropdownOpen ? 'block' : 'hidden'
         }`}
