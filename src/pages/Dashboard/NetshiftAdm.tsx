@@ -1,9 +1,10 @@
 import React from 'react';
 import CardDataStats from '../../components/CardDataStats';
 import ChartThree from '../../components/Charts/ChartThree';
-import ChatCard from '../../components/Chat/Usersprofile';
+import ChatCard from '../../components/User';
 import DefaultLayoutAdm from '../../layout/DefaultLayoutAdm';
-import fiLE from '../../images/logo/fiLE.svg'
+import fiLE from '../../images/logo/fiLE.svg';
+
 
 const NetshiftAdm: React.FC = () => {
   return (

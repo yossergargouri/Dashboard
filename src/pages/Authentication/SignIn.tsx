@@ -4,7 +4,7 @@ import Logo3 from '../../images/logo/logo3.svg';
 import Logo from '../../images/logo/logo.svg';
 import axios from 'axios';
 import { accountService } from '../../services/account.service';
-
+import { AlertFailed } from '../UiElements/Alerts';
   
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +29,7 @@ const SignIn: React.FC = () => {
       const response = await axios.post('http://localhost:5245/api/auth/login', data);
   
       // Si la requête est réussie, vous pouvez récupérer le token de la réponse
-      accountService.saveToken(response.data.token);
+      accountService.saveToken(response.data.token, response.data.userId);
   
 
       navigate('/');
@@ -38,7 +38,6 @@ const SignIn: React.FC = () => {
   
     } catch (error: any) {
       console.error('Login error:', error);
-  
       if (error.response?.status === 400) {
         // Gestion spécifique des erreurs pour le code d'erreur 400 Bad Request
         setErrorMessage('Identifiants invalides ou champs manquants. Veuillez vérifier votre email et votre mot de passe.');
@@ -202,7 +201,7 @@ const SignIn: React.FC = () => {
               <form onSubmit={handleFormSubmit}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    User name
+                    E-mail
                   </label>  
                   <div className="relative">
                     <input
@@ -241,7 +240,7 @@ const SignIn: React.FC = () => {
                   <div className="relative">
                     <input
                       type="password"
-                      placeholder="6+ Characters, 1 Capital letter"
+                      placeholder="password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -280,6 +279,9 @@ const SignIn: React.FC = () => {
                   />
                 </div>
 
+                {errorMessage &&<AlertFailed header={"Error"} message= {errorMessage}/>}
+                
+                {/* {errorMessage && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>} */}
               
 
                 <div className="mt-6 text-center">

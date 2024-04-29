@@ -1,8 +1,5 @@
-
-
-import UserOne from '../../images/user/user-01.png';
-import { Userprofile } from '../../types/Usersprofile';
-
+import UserOne from '../images/user/user-01.png'
+import { Userprofile } from '../types/Usersprofile';
 
 const UsersData: Userprofile[] = [
   {
