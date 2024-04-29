@@ -1,6 +1,5 @@
 import  { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-
 import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
@@ -9,7 +8,6 @@ import AdmsignIn from './pages/Authentication/Admsignin';
 import Chart from './pages/Chart';
 import Upload from './pages/Form/Upload';
 import Contact from './pages/Form/Contact';
-import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Admsettings from './pages/Admsettings';
 import Details from './pages/Details';
@@ -19,7 +17,7 @@ import Analyse from './pages/Analyse';
 import Netshift from './pages/Dashboard/Netshift';
 import NetshiftAdm from './pages/Dashboard/NetshiftAdm';
 import Admprofile from './pages/Admprofile';
-import Usersprofile from './components/Chat/Usersprofile';
+import Usersprofile from './components/User';
 import Updateuser from './pages/Updateuser';
 import AuthProtected from './pages/Authentication/authprotected';
 
@@ -53,15 +51,7 @@ function App() {
                 </>
               }
             />
-            <Route
-              path="/profile"
-              element={
-                <>
-                  <PageTitle title="Profile" />
-                  <Profile />
-                </>
-              }
-            />
+          
             <Route
               path="/Admprofile"
               element={
@@ -152,24 +142,7 @@ function App() {
                 </>
               }
             />
-            <Route
-              path="/chart"
-              element={
-                <>
-                  <PageTitle title="Basic Chart" />
-                  <Chart />
-                </>
-              }
-            />
-            <Route
-              path="/ui/alerts"
-              element={
-                <>
-                  <PageTitle title="Alerts " />
-                  <Alerts />
-                </>
-              }
-            />
+         
             <Route
               path="/ui/buttons"
               element={
