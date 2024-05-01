@@ -35,21 +35,20 @@ const SignIn: React.FC = () => {
       
       accountService.saveToken(response.data.token, response.data.userId); // Passer également l'ID de l'utilisateur
 
-
-
-
       navigate('/');
 
       // Exécuter la fonction onSuccess pour indiquer que la connexion est réussie
   
     } catch (error: any) {
       console.error('Login error:', error);
-      if (error.response?.status === 400) {
-        // Gestion spécifique des erreurs pour le code d'erreur 400 Bad Request
-        setErrorMessage('Identifiants invalides ou champs manquants. Veuillez vérifier votre email et votre mot de passe.');
-      } else {
-        // Gérer les autres erreurs
-        setErrorMessage('Une erreur s\'est produite vérifier vos cordonnées . Veuillez réessayer plus tard.');
+  
+      if (error.response =='Invalid email') { 
+         setErrorMessage ('Invalid email')
+         console.log(errorMessage)
+      } 
+      if (error.response === 'Invalid password'){
+        setErrorMessage('invalide password.');
+        console.log(errorMessage)
       }
     }
   }
