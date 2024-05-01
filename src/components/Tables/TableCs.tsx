@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { getSelectedSolutionId } from '../../services/solutionSelectionService';
+import { Link } from 'react-router-dom';
 
 const TableCS = () => {
   const [tableData, setTableData] = useState<{
     id: string;
-    csprojPath: string;
-    type: string;
-    version: string;
-    slnFileId: number;
+    CsprojPath: string;
+    Type: string;
+    Version: string;
+    SlnFileId: number;
   }[] | null>(null);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ const TableCS = () => {
       return;
     }
 
-    fetch(`http://localhost:5245/CsprojFile/${solutionId}`)
+    fetch(`http://localhost:5245/CsprojFile?CsprojId=${solutionId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -85,22 +86,37 @@ const TableCS = () => {
         </div>
 
         {tableData && tableData.map((csproj, index) => (
-          <div className={`grid grid-cols-3 sm:grid-cols-5 border-b border-stroke dark:border-strokedark`} key={index}>
-            <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">{csproj.csprojPath}</p>
+          <div className={`grid grid-cols-5 sm:grid-cols-7 border-b border-stroke dark:border-strokedark`} key={index}>
+            <div className="flex items p-2.5 xl:p-5">
+              <p className="text-black dark:text-white ">{csproj.CsprojPath}</p>
             </div>
 
 
-            <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">{csproj.type}</p>
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+              <p className="text-black dark:text-white">{csproj.Type}</p>
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
+                <h5 className="font-medium text-black dark:text-white">
+                  {/* {solution.Version} */}
+                </h5>
+              </Link>
             </div>
 
-            <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-3">{csproj.version}</p>
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+              <p className="text-black dark:text-white "> {csproj.Version}</p>
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
+                <h5 className="font-medium text-black dark:text-white">
+                  {/* {solution.Version} */}
+                </h5>
+              </Link>
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
               <p className="text-black dark:text-white"></p>
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
+                <h5 className="font-medium text-black dark:text-white">
+                  {/* {solution.Version} */}
+                </h5>
+              </Link>
             </div>
           </div>
         ))}
