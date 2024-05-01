@@ -41,16 +41,15 @@ const SignIn: React.FC = () => {
   
     } catch (error: any) {
       console.error('Login error:', error);
-  
-      if (error.response =='Invalid email') { 
-         setErrorMessage ('Invalid email')
-         console.log(errorMessage)
+    
+      if ( error.response.data.message === 'Invalid email') { 
+        setErrorMessage('Invalid email');
       } 
-      if (error.response === 'Invalid password'){
-        setErrorMessage('invalide password.');
-        console.log(errorMessage)
+      else if ( error.response.data.message === 'Invalid  password'){
+        setErrorMessage('Invalid password.');
       }
     }
+    
   }
   
 

@@ -1,4 +1,4 @@
-import { config } from '../../types/config';
+  import { config } from '../../types/config';
 
 
 const productData: config[] = [
