@@ -81,9 +81,9 @@ const TableSln: React.FC = () => {
               <tr key={index}>
                 <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
-                    <h5 className="font-medium text-black dark:text-white">
+                    <th className="font-medium text-black dark:text-white">
                       {solution.Name}
-                    </h5>
+                    </th>
                   </Link>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
@@ -93,6 +93,35 @@ const TableSln: React.FC = () => {
                     </h5>
                   </Link>
                 </td>
+                <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
+                    <th className="font-medium text-black dark:text-white">
+                      {solution.Name}
+                    </th>
+                  </Link>
+                </td>
+                <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
+                    <th className="font-medium text-black dark:text-white">
+                      {/* {{} } */}
+                    </th>
+                  </Link>
+                </td>
+                <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
+                    <th className="font-medium text-black dark:text-white">
+                      {/* {solution.Name} */}
+                    </th>
+                  </Link>
+                </td>
+                <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
+                    <th className="font-medium text-black dark:text-white">
+                      {/* {solution.Name} */}
+                    </th>
+                  </Link>
+                </td>
+               
               </tr>
             ))}
           </tbody>
