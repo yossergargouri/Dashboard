@@ -21,23 +21,32 @@ const SignUp: React.FC = () => {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+  
+    // Vérifier si les champs sont vides
+    if (!formData.Email || !formData.PasswordHash || !formData.RetypePassword) {
+      // Afficher un message d'erreur ou effectuer une action appropriée
+      setPasswordError('All fields are required');
+      return;
+    }
+  
     if (formData.PasswordHash !== formData.RetypePassword) {
       setPasswordError('Passwords do not match');
       return;
     }
+  
     try {
       const response = await axios.post('http://localhost:5245/api/auth/register', formData);
       console.log('Inscription réussie ! Réponse du serveur :', response.data);
       // Ajoutez ici la logique de redirection ou de notification d'inscription réussie
-
+  
       navigate('/auth/signin');
-
+  
     } catch (error) {
       console.error('Erreur lors de l\'inscription:', error);
       // Ajoutez ici la logique de gestion des erreurs
-      alert(' vous avez déja inscrit, connecter vous')
     }
-  };  
+  };
+  
   return (
     <>
   

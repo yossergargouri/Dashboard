@@ -1,8 +1,58 @@
+import  { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
-
 import DefaultLayout from '../layout/DefaultLayout';
+import axios from 'axios';
+import { accountService } from '../services/account.service';
 
 const Settings = () => {
+  const [userId, setUserId] = useState<string>('');
+  const [formData, setFormData] = useState({
+    id: 0, // Initialiser à 0
+    username: '',
+    email: '',
+    passwordHash: '',
+    confirmPassword: '',
+    telephone: ''
+  });
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        const loggedInUserId = await accountService.getUserId();
+        setUserId(loggedInUserId || '');
+      } catch (error) {
+        console.error('Error fetching user ID:', error);
+      }
+    };
+
+    fetchUserId(); // Appeler la fonction une fois au montage du composant
+
+  }, []);
+
+  useEffect(() => {
+    // Mettre à jour l'ID dans formData lors de changements dans userId
+    setFormData(prevState => ({
+      ...prevState,
+      id: Number(userId)
+    }));
+  }, [userId]); // Surveiller les changements de userId
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(`http://localhost:5245/User/${formData.id}`, formData);
+      console.log(response.data);
+      // Traitez la réponse de l'API ici (par exemple, afficher un message de succès)
+    } catch (error) {
+      console.error(error);
+      // Traitez les erreurs de l'API ici (par exemple, afficher un message d'erreur)
+    }
+  };
+
   return (
     <DefaultLayout>
       <div className="mx-auto max-w-270">
@@ -17,7 +67,7 @@ const Settings = () => {
                 </h3>
               </div>
               <div className="p-7">
-                <form action="#">
+                <form onSubmit={handleSubmit}>
                   <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
                     <div className="w-full sm:w-1/2">
                       <label
@@ -55,10 +105,12 @@ const Settings = () => {
                         <input
                           className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                           type="text"
-                          name="fullName"
                           id="fullName"
                           placeholder="your name"
                           defaultValue=""
+                          name='username'
+                          value={formData.username}
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
@@ -73,10 +125,12 @@ const Settings = () => {
                       <input
                         className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                         type="text"
-                        name="phoneNumber"
                         id="phoneNumber"
                         placeholder="+... .. ... ..."
                         defaultValue=""
+                        name='telephone'
+                          value={formData.telephone}
+                          onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -117,10 +171,12 @@ const Settings = () => {
                       <input
                         className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                         type="email"
-                        name="emailAddress"
+                        name="email"
                         id="emailAddress"
                         placeholder="...@... .com"
                         defaultValue=""
+                          value={formData.email}
+                          onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -128,75 +184,45 @@ const Settings = () => {
                   <div className="mb-5.5">
                     <label
                       className="mb-3 block text-sm font-medium text-black dark:text-white"
-                      htmlFor="Username"
+                      htmlFor="password"
                     >
-                     
+                      Password
                     </label>
-                    <div className="relative">
-                      <span className="absolute left-4.5 top-4">
-                        <svg
-                          className="fill-current"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                        </svg>
-                      </span>
+                    <input
+                      className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                      type="password"
+                      name="passwordHash"
+                      id="password"
+                      placeholder=""
+                      defaultValue=""
+                      value={formData.passwordHash}
+                      onChange={handleChange}
+                    />
+                  </div>
 
                   <div className="mb-5.5">
                     <label
                       className="mb-3 block text-sm font-medium text-black dark:text-white"
-                      htmlFor="emailAddress"
+                      htmlFor="confirmPassword"
                     >
-                     Password
+                      Confirm password
                     </label>
-                    <div className="relative">
-                      <span className="absolute left-4.5 top-4">
-                      
-                      </span>
-                      <input
-                        className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder=""
-                        defaultValue=""
-                      />
-                    </div>
-                  </div>
-
-
-                  <div className="mb-5.5">
-                    <label
-                      className="mb-3 block text-sm font-medium text-black dark:text-white"
-                      htmlFor="emailAddress"
-                    >
-                     Confirm password
-                    </label>
-                    <div className="relative">
-                      <span className="absolute left-4.5 top-4">
-                      
-                      </span>
-                      <input
-                        className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder=""
-                        defaultValue=""
-                      />
-                    </div>
-                  </div>
-                    </div>
-
+                    <input
+                      className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                      type="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      placeholder=""
+                      defaultValue=""
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                    />
                   </div>
 
                   <div className="flex justify-end gap-4.5">
                     <button
                       className="flex justify-center rounded border border-stroke py-2 px-6 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
-                      type="submit"
+                      type="button"
                     >
                       Cancel
                     </button>
