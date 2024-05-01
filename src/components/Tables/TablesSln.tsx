@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { accountService } from '../../services/account.service';
+import { Link } from 'react-router-dom';
+import { setSelectedSolutionId } from '../../services/solutionSelectionService';
 
 interface Solution {
-  id: string;
+  id: number; // Changer le type de l'ID en nombre
   Name: string;
   Version: string;
-  // Ajoutez d'autres propriétés ici si nécessaire
 }
 
 const TableSln: React.FC = () => {
@@ -14,32 +15,37 @@ const TableSln: React.FC = () => {
 
   useEffect(() => {
     const fetchUserId = async () => {
-      const loggedInUserId = await accountService.getUserId();
-      setUserId(loggedInUserId || ''); // Mettre à jour l'état UserId avec l'ID récupéré
+      try {
+        const loggedInUserId = await accountService.getUserId();
+        setUserId(loggedInUserId || '');
+      } catch (error) {
+        console.error('Error fetching user ID:', error);
+      }
     };
 
     fetchUserId();
   }, []);
 
-
   useEffect(() => {
-    fetch(`http://localhost:5245/api/SlnFiles?userId=${userId}`)
-    .then((response) => {
+    const fetchSolutions = async () => {
+      try {
+        const response = await fetch(`http://localhost:5245/api/SlnFiles?userId=${userId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Data received:', data); // Log the received data
+        const data = await response.json();
         setTableSolutions(data);
-      })
-      
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-    }, [userId])  ; // Ensure all dependencies are included here if needed
+      } catch (error) {
+        console.error('Error fetching solutions:', error);
+      }
+    };
 
+    fetchSolutions();
+  }, [userId]);
+
+  const handleSolutionSelect = (solutionId: number) => {
+    setSelectedSolutionId(solutionId);
+  };
 
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -57,7 +63,7 @@ const TableSln: React.FC = () => {
                 Version
               </th>
               <th className="py-4 px-4 font-medium text-black dark:text-white">
-           Total packages
+                Total packages
            </th>
            <th className="py-4 px-4 font-medium text-black dark:text-white">
              Total project refrences
@@ -71,20 +77,24 @@ const TableSln: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {tableSolutions.map((solution,index) => (
-                  <tr key={index} >
-                    <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                      <h5 className="font-medium text-black dark:text-white">
-                          {solution.Name}
-                         </h5>
-                     </td>
-                     <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                          <h5 className="font-medium text-black dark:text-white">
-                           {solution.Version}
-                           </h5>
-                     </td>
-                  </tr>
-))}
+            {tableSolutions.map((solution, index) => (
+              <tr key={index}>
+                <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                  <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
+                    <h5 className="font-medium text-black dark:text-white">
+                      {solution.Name}
+                    </h5>
+                  </Link>
+                </td>
+                <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                  <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
+                    <h5 className="font-medium text-black dark:text-white">
+                      {solution.Version}
+                    </h5>
+                  </Link>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
