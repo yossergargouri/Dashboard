@@ -1,20 +1,21 @@
-import  { useEffect, useState } from 'react';
-import { getSelectedSolutionId } from '../../services/solutionSelectionService';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getSelectedSolutionId, setSelectedCsprojId } from '../../services/solutionSelectionService';
+
+interface Csproj {
+  Id: number;
+  CsprojPath: string;
+  Type: string;
+  Version: string;
+}
 
 const TableCS = () => {
-  const [tableData, setTableData] = useState<{
-    id: string;
-    CsprojPath: string;
-    Type: string;
-    Version: string;
-    SlnFileId: number;
-  }[] | null>(null);
+  const [tableData, setTableData] = useState<Csproj[]>([]);
 
   useEffect(() => {
     const solutionId = getSelectedSolutionId();
     if (!solutionId) {
-      // Gérer le cas où aucun ID de solution n'est sélectionné
+      // Handle case where no solution ID is selected
       return;
     }
 
@@ -40,6 +41,11 @@ const TableCS = () => {
         // Handle fetching or processing errors (e.g., display error message)
       });
   }, []);
+
+  const handleCsprojSelect = (csprojId: number) => {
+    setSelectedCsprojId(csprojId);
+    console.log('CsprojId selected and stored in local storage:', csprojId); // Log for verification
+  };
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
@@ -85,34 +91,37 @@ const TableCS = () => {
           </div>
         </div>
 
-        {tableData && tableData.map((csproj, index) => (
+        {tableData.map((csproj, index) => (
           <div className={`grid grid-cols-5 sm:grid-cols-7 border-b border-stroke dark:border-strokedark`} key={index}>
             <div className="flex items p-2.5 xl:p-5">
-              <p className="text-black dark:text-white ">{csproj.CsprojPath}</p>
+              <p className="text-black dark:text-white ">
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.Id)}>
+                {csproj.CsprojPath}
+                </Link>
+                </p>
+                
             </div>
 
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">{csproj.Type}</p>
-              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
-                <h5 className="font-medium text-black dark:text-white">
-                  {/* {solution.Version} */}
-                </h5>
-              </Link>
+              <p className="text-black dark:text-white">
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.Id)}>
+                {csproj.Type}
+                </Link>
+                </p>
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white "> {csproj.Version}</p>
-              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
-                <h5 className="font-medium text-black dark:text-white">
-                  {/* {solution.Version} */}
-                </h5>
+              <p className="text-black dark:text-white "> 
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.Id)}>
+              {csproj.Version}
               </Link>
+              </p>  
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
               <p className="text-black dark:text-white"></p>
-              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.Id)}>
                 <h5 className="font-medium text-black dark:text-white">
                   {/* {solution.Version} */}
                 </h5>

@@ -1,9 +1,20 @@
 import  { useEffect, useState } from 'react';
+import { getSelectedCsprojId } from '../../services/solutionSelectionService';
+interface Projects{
+  id:number;
+  Name:string;
+  Path:string;
+}
 const Tableprojectref = () => {
-  const [tablefourData, setTableFourData] = useState<{ id: string, name: string, path: string }[]>([]);
 
+  const [tableprojectref, setTableprojectref] = useState<Projects[]>([]);
   useEffect(() => {
-    fetch('http://localhost:5245/Reference')
+    const csprojId = getSelectedCsprojId();
+    if (!csprojId) {
+      return;
+    }
+
+    fetch(`http://localhost:5245/Projects?projectId=${csprojId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -12,16 +23,17 @@ const Tableprojectref = () => {
       })
       .then((data) => {
         console.log('Data received:', data);
-        // Extracting the relevant data from $values array
-        const extractedData = data.$values.map((item: any) => ({
-          id: item.id,
-          name: item.name,
-          version: item.version
-        }));
-        setTableFourData(extractedData);
+        if (Array.isArray(data)) {
+          setTableprojectref(data);
+        } else if (typeof data === 'object') {
+          setTableprojectref([data]); // Wrap the object in an array
+        } else {
+          throw new Error('Data is not in expected format');
+        }
       })
       .catch((error) => {
-        console.error('Error fetching data:', error); // Log any errors
+        console.error('Error fetching or processing data:', error.message);
+        // Handle fetching or processing errors (e.g., display error message)
       });
   }, []);
   return (
@@ -46,17 +58,17 @@ const Tableprojectref = () => {
             </tr>
           </thead>
           <tbody>
-            {tablefourData.map((packageItem, key) => (
+            {tableprojectref.map((packageItem, key) => (
               <tr key={key}>
                 <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">
-                    {packageItem.name}
+                    {packageItem.Name}
                   </h5>
                   
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                    <p className="text-black dark:text-white">
-                    {/* {packageItem.invoiceDate} */}
+                   {packageItem.Name}
                   </p> 
                 </td>
               </tr>
