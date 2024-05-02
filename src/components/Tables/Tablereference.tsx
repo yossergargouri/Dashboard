@@ -1,10 +1,20 @@
 import  { useEffect, useState } from 'react';
-
+import { getSelectedCsprojId } from '../../services/solutionSelectionService';
+interface Reference{
+  id:number;
+  Name:string;
+  Path:string;
+}
 const Tablereference = () => {
-  const [tabletreeData, setTableTreeData] = useState<{ id: string, name: string, path: string }[]>([]);
+  const [tablereference, setTablereference] = useState<Reference[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:5245/Packages')
+    const csprojId = getSelectedCsprojId();
+    if (!csprojId) {
+      return;
+    }
+
+    fetch(`http://localhost:5245/Reference?referenceId=${csprojId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -13,16 +23,17 @@ const Tablereference = () => {
       })
       .then((data) => {
         console.log('Data received:', data);
-        // Extracting the relevant data from $values array
-        const extractedData = data.$values.map((item: any) => ({
-          id: item.id,
-          name: item.name,
-          version: item.version
-        }));
-        setTableTreeData(extractedData);
+        if (Array.isArray(data)) {
+          setTablereference(data);
+        } else if (typeof data === 'object') {
+          setTablereference([data]); // Wrap the object in an array
+        } else {
+          throw new Error('Data is not in expected format');
+        }
       })
       .catch((error) => {
-        console.error('Error fetching data:', error); // Log any errors
+        console.error('Error fetching or processing data:', error.message);
+        // Handle fetching or processing errors (e.g., display error message)
       });
   }, []);
 
@@ -48,16 +59,16 @@ const Tablereference = () => {
             </tr>
           </thead>
           <tbody>
-            {tabletreeData.map((packageItem, key) => (
+            {tablereference.map((packageItem, key) => (
               <tr key={key}>
                 <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">
-                    {packageItem.name}
+                    {packageItem.Name}
                   </h5>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                    <p className="text-black dark:text-white">
-                     {packageItem.path} 
+                     {packageItem.Path} 
                   </p> 
                 </td>
               </tr>
