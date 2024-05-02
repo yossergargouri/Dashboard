@@ -16,8 +16,8 @@ import Netshift from './pages/Dashboard/Netshift';
 import NetshiftAdm from './pages/Dashboard/NetshiftAdm';
 import Admprofile from './pages/Admprofile';
 import Usersprofile from './components/User';
-import Updateuser from './pages/Updateuser';
 import AuthProtected from './pages/Authentication/authprotected';
+import Popup from './components/Popup';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -68,6 +68,7 @@ function App() {
                 </>
               }
             />
+
             <Route
               path="/NetshiftAdm"
               element={
@@ -123,11 +124,11 @@ function App() {
               }
             />
             <Route
-              path="/Updateuser"
+              path="/Popup"
               element={
                 <>
                   <PageTitle title="Updateuser" />
-                  <Updateuser />
+                  <Popup />
                 </>
               }
             />
