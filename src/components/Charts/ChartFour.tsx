@@ -51,13 +51,13 @@ const options: ApexOptions = {
 
 const ChartThree: React.FC = () => {
   const [state, setState] = useState<ChartThreeState>({
-    series: [65, 34, 12, 56],
+    series: [5, 1, 82, 12],
   });
 
   const handleReset = () => {
     setState((prevState) => ({
       ...prevState,
-      series: [65, 34, 12, 56],
+      series: [5, 1, 82, 12],
     }));
   };
   handleReset;
@@ -67,7 +67,7 @@ const ChartThree: React.FC = () => {
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white">
-            Visitors Analytics
+            Solutions Type
           </h5>
         </div>
         <div>
@@ -91,7 +91,7 @@ const ChartThree: React.FC = () => {
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> web </span>
-              <span> 65% </span>
+              <span> 5% </span>
             </p>
           </div>
         </div>
@@ -100,7 +100,7 @@ const ChartThree: React.FC = () => {
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#6577F3]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> console</span>
-              <span> 34% </span>
+              <span> 1% </span>
             </p>
           </div>
         </div>
@@ -109,7 +109,7 @@ const ChartThree: React.FC = () => {
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#8FD0EF]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> library </span>
-              <span> 45% </span>
+              <span> 82% </span>
             </p>
           </div>
         </div>

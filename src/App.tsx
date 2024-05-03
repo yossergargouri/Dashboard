@@ -8,6 +8,7 @@ import AdmsignIn from './pages/Authentication/Admsignin';
 import Upload from './pages/Form/Upload';
 import Contact from './pages/Form/Contact';
 import Settings from './pages/Settings';
+import Othersettings from './pages/Othersettings'
 import Admsettings from './pages/Admsettings';
 import Details from './pages/Details';
 import Buttons from './pages/UiElements/Buttons';
@@ -16,8 +17,9 @@ import Netshift from './pages/Dashboard/Netshift';
 import NetshiftAdm from './pages/Dashboard/NetshiftAdm';
 import Admprofile from './pages/Admprofile';
 import Usersprofile from './components/User';
+
 import AuthProtected from './pages/Authentication/authprotected';
-import Popup from './components/Popup';
+import Popup from '../src/components/Popup';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -123,12 +125,23 @@ function App() {
                 </>
               }
             />
-            <Route
+              <Route
+              path="/Othersettings"
+              element={
+                <>
+                  <PageTitle title="Settings" />
+                  <Othersettings />
+                </>
+              }
+            />
+           <Route
               path="/Popup"
               element={
                 <>
                   <PageTitle title="Updateuser" />
-                  <Popup />
+                  <Popup onClose={function (): void {
+                    throw new Error('Function not implemented.');
+                  } } />
                 </>
               }
             />

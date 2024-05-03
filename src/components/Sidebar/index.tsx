@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import Logo from '../../images/logo/logo2.svg';
 import contactus from '../../images/icon/contactus.svg';
-
+import uploadicon from '../../images/icon/uploadicon.svg';
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
@@ -197,6 +197,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Settings --> */}
               <li>
                 <NavLink
+                to="/Upload"
+                className={({ isActive }) =>
+                'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ' +
+                (isActive && '!text-white')
+                }
+                >
+                <img src={uploadicon} width={15} height={15} alt="ion" />
+                Upload your solution
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
                 to="/contact"
                 className={({ isActive }) =>
                 'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ' +
@@ -204,7 +217,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 }
                 >
                 <img src={contactus} width={25} height={25} alt="Logo" />
-                Contact us
+                Contact Admin 
                 </NavLink>
               </li>
               <li>
