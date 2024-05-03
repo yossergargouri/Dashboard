@@ -3,6 +3,7 @@
   import { Link } from 'react-router-dom';
   import { setSelectedSolutionId } from '../../services/solutionSelectionService';
 
+
   interface Solution {
     id: number; // Changer le type de l'ID en nombre
     Name: string;
@@ -65,13 +66,13 @@
                 <th className="py-4 px-4 font-medium text-black dark:text-white">
                   Total packages
             </th>
-            <th className="py-4 px-4 font-medium text-black dark:text-white">
+            <th className="py-4 px-4 font-medium text-center text-black dark:text-white">
               Total project refrences
             </th>
-            <th className="py-4 px-4 font-medium text-black dark:text-white">
+            <th className="py-4 px-4 font-medium text-center text-black dark:text-white">
             Total referenes
             </th>
-            <th className="py-4 px-4 font-medium text-black dark:text-white">
+            <th className="py-4 px-4 font-medium text-center text-black dark:text-white">
               Status 
             </th>
               </tr>
@@ -96,7 +97,7 @@
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
                       <span className="font-medium text-black dark:text-white">
-                        {solution.Name}
+                        {}
                       </span>
                     </Link>
                   </td>
@@ -116,9 +117,7 @@
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
-                      <span className="font-medium text-black dark:text-white">
-                        {/* {solution.Name} */}
-                      </span>
+                     
                     </Link>
                   </td>
                 

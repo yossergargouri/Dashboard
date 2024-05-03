@@ -1,5 +1,4 @@
 
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Popup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
@@ -77,11 +76,8 @@ const Popup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 />
               </div>
             </div>
-            <div className="mb-5.5">
-              <label
-                className="mb-3 block text-sm font-medium text-black dark:text-white"
-                htmlFor="emailAddress"
-              >
+            <div className="mb-5.5 text-black dark:text-white">
+              <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="emailAddress">  
                 Email Address
               </label>
               <div className="relative">
@@ -169,7 +165,7 @@ const Popup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               </button>
               <Link to ="/NetshiftAdm">
               <button
-              className="flex justify-center rounded border border-stroke py-2 px-6 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
+             className="flex justify-center rounded bg-primary py-2 px-6 font-medium text-gray hover:bg-opacity-90"
                 type="button"
                 onClick={onClose}>
                 Fermer

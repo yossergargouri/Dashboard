@@ -19,14 +19,19 @@ const Usersprofile = () => {
   }, []);
 
   return (
-    
-    <div className="col-span-40 rounded-sm border border-stroke bg-white py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-6">
-      <h4 className="mb-6 px-7.5 text-xl font-semibold text-black dark:text-white">
-        Users
-      </h4>
-      <Link  to ='/Popup'>
+
+      <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
+        <div className="flex flex-col gap-9">
+          {/* <!-- Contact Form --> */}
+          <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+            <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+              <h3 className="font-medium text-black dark:text-white">
+               Users
+              </h3>
+          </div>    
+           <Link  to ='/Popup'>
         <div>
-          {usersData.map((user, index) => (
+           {usersData.map((user, index) => (
             <div className="flex items-center gap-5 py-3 px-7.5 hover:bg-gray-3 dark:hover:bg-meta-4" key={index}>
               <div className="relative h-14 w-14 rounded-full">
               <img src={user.Photo} alt="User" />
@@ -43,8 +48,11 @@ const Usersprofile = () => {
             </div>
           ))}
         </div>
-      </Link>
-    </div>
+            </Link>
+            </div>
+            
+        </div>
+      </div>
   );
 };
 

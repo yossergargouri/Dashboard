@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import DefaultLayout from '../../layout/DefaultLayout';
 import TableSln from '../../components/Tables/TablesSln';
-
+import ChartOne from  '../../components/Charts/ChartOne';
+import ChartFour from '../../components/Charts/ChartFour';
 
 
 const Netshift: React.FC = () => {
@@ -10,20 +11,20 @@ const Netshift: React.FC = () => {
     <div>
     <DefaultLayout>
     <div>
+    <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+      <ChartFour/>
+      <ChartOne/>
 
+     </div> 
+      <br></br>
+       <br></br>
     <TableSln/>
-    <br></br>
-    <br></br>
+       <br></br>
+       <br></br>
     
     
-          <Link
-              to="../Upload"
-              className="inline-flex items-center justify-center rounded-full bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
-            >
-              Upload a new solution
-            </Link>
-   
-    </div>
+      
+            </div>
     </DefaultLayout>
 
    
