@@ -203,7 +203,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 (isActive && '!text-white')
                 }
                 >
-                <img src={uploadicon} width={15} height={15} alt="ion" />
+                <img src={uploadicon} width={15} height={15} alt="icon" />
                 Upload your solution
                 </NavLink>
               </li>

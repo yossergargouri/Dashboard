@@ -1,21 +1,55 @@
-import React from 'react';
+
 import CardDataStats from '../../components/CardDataStats';
-import ChartThree from '../../components/Charts/ChartThree';
-import ChartTwo from  '../../components/Charts/ChartTwo';
-
-
-
+import Solutiontype from '../../components/Charts/Solutiontypeadm';
+import ChartTwo from  '../../components/Charts/Weeklyusers';
 import DefaultLayoutAdm from '../../layout/DefaultLayoutAdm';
 import fiLE from '../../images/logo/fiLE.svg';
+import React, { useEffect, useState } from 'react';
 
+
+interface UsersData {
+  number: number;
+  connectedusers: number;
+ 
+}
 
 const NetshiftAdm: React.FC = () => {
+  const [userData, setUserData] = useState<UsersData[]>([]);
+  const [userNumber, ] = useState<number>(0);
+  const [userconnected , ] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(``);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        console.log("fetchUsersdata", data);
+        setUserData([data]);
+      } catch (error) {
+        console.error('Error fetching solutions:', error);
+      }
+    };
+
+    if (userNumber !== 0) {
+      fetchUsers();
+    }
+    if (userconnected !== 0) {
+      fetchUsers();
+    }
+
+  }, [userNumber,userconnected]);
+
+ 
+
   return (
 
     <DefaultLayoutAdm>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
         
-      <CardDataStats title="Total Users" total="0" >
+      <CardDataStats title="Total Users" total ={userNumber.toString()} >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -41,7 +75,7 @@ const NetshiftAdm: React.FC = () => {
         <CardDataStats title="Total Solutions" total="0">
         <img src={fiLE} width={20} height={20} alt="Logo" />
         </CardDataStats>
-        <CardDataStats title="Total connected users " total="0" >
+        <CardDataStats title="Total connected users " total={userNumber.toString()} >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -67,7 +101,7 @@ const NetshiftAdm: React.FC = () => {
       </div>
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
       <ChartTwo/>
-      <ChartThree />
+      <Solutiontype />
     
 
        

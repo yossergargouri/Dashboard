@@ -1,0 +1,52 @@
+{
+  "Sln": [
+    {
+      "id": 1 ,
+      "nbSLn":5,
+      "nbpackages":3,
+      "Slnpercent":3,
+      "webpercent":24 ,
+      "consolepercent":2354 ,
+      "librarypercent":4,
+      "unknownpercent":4
+    }
+  ],
+
+    "UserData": [
+    {
+      "id ":2,
+      "totalusers":25,
+      " TotalConnecteduser":432
+    }
+    
+  ],
+  "Packages":[
+    {
+      "name ": ,
+      "path": ,
+      "compatible":,
+      "incompatible":,
+
+    }
+  ],
+
+  "References":[
+    {
+      "name ": ,
+      "path": ,
+      "compatible":,
+      "incompatible":,
+
+    }
+  ],
+  "Projectreference":[
+    {
+      "name ": ,
+      "path": ,
+      "compatible":,
+      "incompatible":,
+
+    }
+  ],
+
+}

@@ -68,12 +68,12 @@ useEffect(() => {
         <tr key={key}>
         <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
           <h5 className="font-medium text-black dark:text-white">
-            {product.Name}
+            {/* {product.Name} */}
           </h5>
         </td>
         <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
            <p className="text-black dark:text-white">
-             {product.Path} 
+             {/* {product.Path}  */}
           </p> 
         </td>
       </tr>

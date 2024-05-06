@@ -5,9 +5,9 @@
 
 
   interface Solution {
-    id: number; // Changer le type de l'ID en nombre
-    Name: string;
-    Version: string;
+    id: number; 
+    name: string;
+    version: string;
   }
 
   const TableSln: React.FC = () => {
@@ -30,24 +30,25 @@
     useEffect(() => {
       const fetchSolutions = async () => {
         try {
-          const response = await fetch(`http://localhost:5245/api/SlnFiles?userId=${userId}`);
+          const response = await fetch(`http://localhost:5245/api/SlnFiles/GetSlnFileByUserId/${userId}`);
           if (!response.ok) {
             throw new Error('Failed to fetch data');
           }
           const data = await response.json();
+          console.log("fetchSolutionsdata", data)
           setTableSolutions(data);
         } catch (error) {
           console.error('Error fetching solutions:', error);
         }
       };
 
-      fetchSolutions();
+      if(userId) fetchSolutions();
     }, [userId]);
 
     const handleSolutionSelect = (solutionId: number) => {
       setSelectedSolutionId(solutionId);
     };
-
+    //console.log('yosser houni',tableSolutions[0]?.name);
     return (
       <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
         <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
@@ -78,19 +79,19 @@
               </tr>
             </thead>
             <tbody>
-              {tableSolutions.map((solution, index) => (
+              {tableSolutions?.map((solution, index) => (
                 <tr key={index}>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                     <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
-                      <td className="font-medium text-black dark:text-white">
-                        {solution.Name}
-                      </td>
+                      <h5 className="font-medium text-black dark:text-white">
+                        {solution?.name}
+                      </h5>
                     </Link>
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                     <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
                       <h5 className="font-medium text-black dark:text-white">
-                        {solution.Version}
+                        {solution.version}
                       </h5>
                     </Link>
                   </td>
@@ -117,7 +118,8 @@
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
-                     
+                      <span className="font-medium text-black dark:text-white">
+                      </span>
                     </Link>
                   </td>
                 
