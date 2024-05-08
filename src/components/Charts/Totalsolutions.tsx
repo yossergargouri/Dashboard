@@ -1,6 +1,7 @@
 import { ApexOptions } from 'apexcharts';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import axios from 'axios';
 
 const options: ApexOptions = {
   legend: {
@@ -81,7 +82,7 @@ const options: ApexOptions = {
   xaxis: {
     type: 'category',
     categories: [
-      
+
       'Jan',
       'Feb',
       'Mar',
@@ -120,24 +121,33 @@ interface ChartOneState {
   }[];
 }
 
-const ChartOne: React.FC = () => {
-  const [state, setState] = useState<ChartOneState>({
-    series: [
+const TotalSolutions: React.FC = () => {
+  const [totalSolutionsList, setTotalSolutionsList] = useState<Array<number>>([]);
+
+  const series = useMemo(() => {
+    return [
       {
-        name: 'Product One',
-        data: [ 0,1,2,4,6,],
+        name: 'totalSlnFiles',
+        data: totalSolutionsList,
       },
 
-      
-    ],
-  });
+    ]
+  }, [totalSolutionsList])
 
-  const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
-  };
-  handleReset;
+  useEffect(() => {
+    const fetchTotalSolutions = async () => {
+      try {
+        const response = await axios.get('http://localhost:5245/api/SlnFiles/Totalsln');
+        if (response.data && response.data?.length > 0) setTotalSolutionsList([0, ...response.data.map((v: any) => v.totalSlnFilesInYear)]);
+      } catch (error) {
+        console.error('Error fetching total solutions:', error);
+      }
+    };
+
+    fetchTotalSolutions();
+  }, []);
+
+
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-6">
@@ -159,7 +169,7 @@ const ChartOne: React.FC = () => {
         <div id="chartOne" className="-ml-5">
           <ReactApexChart
             options={options}
-            series={state.series}
+            series={series}
             type="area"
             height={350}
           />
@@ -169,4 +179,4 @@ const ChartOne: React.FC = () => {
   );
 };
 
-export default ChartOne;
+export default TotalSolutions;

@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import { getSelectedSolutionId, setSelectedCsprojId } from '../../services/solutionSelectionService';
 
 interface Csproj {
-  Id: number;
-  CsprojPath: string;
-  Type: string;
-  Version: string;
+  id: number;
+  name: string;
+  type: string;
+  version: string;
+  numberOfPackages:number;
+  numberOfReferences:number;
+  numberOfProjects:number;
 }
 
 const TableCS = () => {
@@ -19,7 +22,7 @@ const TableCS = () => {
       return;
     }
 
-    fetch(`http://localhost:5245/CsprojFile?CsprojId=${solutionId}`)
+    fetch(`http://localhost:5245/api/CsprojFile/GetCsprojFilesBySlnId/${solutionId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -95,8 +98,8 @@ const TableCS = () => {
           <div className={`grid grid-cols-5 sm:grid-cols-7 border-b border-stroke dark:border-strokedark`} key={index}>
             <div className="flex items p-2.5 xl:p-5">
               <p className="text-black dark:text-white ">
-              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.Id)}>
-                {csproj.CsprojPath}
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.id)}>
+                {csproj?.name}
                 </Link>
                 </p>
                 
@@ -105,29 +108,54 @@ const TableCS = () => {
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
               <p className="text-black dark:text-white">
-              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.Id)}>
-                {csproj.Type}
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.id)}>
+                {csproj?.type}
                 </Link>
                 </p>
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
               <p className="text-black dark:text-white "> 
-              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.Id)}>
-              {csproj.Version}
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.id)}>
+              {csproj?.version}
               </Link>
               </p>  
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
               <p className="text-black dark:text-white"></p>
-              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.Id)}>
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.id)}>
                 <h5 className="font-medium text-black dark:text-white">
-                  {/* {solution.Version} */}
+                  {csproj?.numberOfPackages}
+                </h5>
+              </Link>
+            </div>
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+              <p className="text-black dark:text-white"></p>
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.id)}>
+                <h5 className="font-medium text-black dark:text-white">
+                  {csproj?.numberOfReferences}
+                </h5>
+              </Link>
+            </div>
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+              <p className="text-black dark:text-white"></p>
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.id)}>
+                <h5 className="font-medium text-black dark:text-white">
+                  {csproj?.numberOfProjects}
+                </h5>
+              </Link>
+            </div>
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+              <p className="text-black dark:text-white"></p>
+              <Link to={`/Details`} className="block w-full h-full" onClick={() => handleCsprojSelect(csproj.id)}>
+                <h5 className="font-medium text-black dark:text-white">
+                  {/* {csproj?.numberOfProjects} */}
                 </h5>
               </Link>
             </div>
           </div>
+          
         ))}
       </div>
     </div>

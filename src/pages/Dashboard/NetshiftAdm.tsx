@@ -1,21 +1,56 @@
-import React from 'react';
+
 import CardDataStats from '../../components/CardDataStats';
-import ChartThree from '../../components/Charts/ChartThree';
-import ChartTwo from  '../../components/Charts/ChartTwo';
-
-
-
+import Solutiontype from '../../components/Charts/Solutiontypeadm';
+import ChartTwo from  '../../components/Charts/Weeklyusers';
 import DefaultLayoutAdm from '../../layout/DefaultLayoutAdm';
 import fiLE from '../../images/logo/fiLE.svg';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+
 
 
 const NetshiftAdm: React.FC = () => {
+  const [totalUsers, setTotalUsers] = useState<number>(0);
+  const [totalSolutions, setTotalSolutions] = useState<number>(0);
+  const [connectedUsers, setConnectedUsers] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchTotalUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost:5245/api/Users/Total');
+        const responseData = response.data;
+        console.log("responseData", responseData)
+     // to complete
+  } catch (error) {
+        console.error('Error fetching total users:', error);
+      }
+    };
+
+    fetchTotalUsers();
+  }, []);
+
+  useEffect(() => {
+    const fetchTotalSolutions = async () => {
+      try {
+        const response = await axios.get('http://localhost:5245/api/SlnFiles/Totalsln');
+       if(response.data && response.data?.length > 0) setTotalSolutions(response.data[0]?.totalSlnFiles);
+      } catch (error) {
+        console.error('Error fetching total solutions:', error);
+      }
+    };
+
+    fetchTotalSolutions();
+  }, []);
+
+
+
   return (
 
     <DefaultLayoutAdm>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
         
-      <CardDataStats title="Total Users" total="0" >
+      <CardDataStats title="Total Users" total ={totalUsers.toString()} >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -38,10 +73,10 @@ const NetshiftAdm: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Solutions" total="0">
+        <CardDataStats title="Total Solutions" total={totalSolutions.toString()}>
         <img src={fiLE} width={20} height={20} alt="Logo" />
         </CardDataStats>
-        <CardDataStats title="Total connected users " total="0" >
+        <CardDataStats title="Total connected users " total={"0"} >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -66,8 +101,13 @@ const NetshiftAdm: React.FC = () => {
         </CardDataStats>
       </div>
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+
+
+
+
+
       <ChartTwo/>
-      <ChartThree />
+      <Solutiontype />
     
 
        

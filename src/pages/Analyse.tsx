@@ -1,18 +1,19 @@
 
 import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import TableCs from '../components/Tables/TableCs';
-// import TableTwo from '../components/Tables/TableTwo';
+import Compatibility from '../components/Charts/Compatbility';
 import DefaultLayout from '../layout/DefaultLayout';
 
 const Analyse = () => {
   return (
     <DefaultLayout>
-         <Breadcrumb pageName="Your project list " />
+    <div className="flex flex-col gap-10">
 
-<div className="flex flex-col gap-10">
-  <TableCs />
-  {/* <TableTwo/> */}
-</div>
+      <Compatibility/>
+      <Breadcrumb pageName="Your project list " />
+      <TableCs />
+  
+    </div>
     </DefaultLayout>
   )
 }

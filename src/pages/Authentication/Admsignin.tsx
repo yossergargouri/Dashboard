@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
+
 import Logo3 from '../../images/logo/logo3.svg';
 import Logo from '../../images/logo/logo.svg';
 
@@ -18,11 +18,7 @@ const AdmsignIn: React.FC = () => {
                 <img className="hidden dark:block" src={Logo} alt="Logo" />
                 <img className="dark:hidden" src={Logo3} alt="Logo" />
               </Link>
-            
-              <p className="2xl:px-20">
-                {/* ...............;;;;; */}
-              </p>
-
+ 
               <span className="mt-15 inline-block">
                 <svg
                   width="350"

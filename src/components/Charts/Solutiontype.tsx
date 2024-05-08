@@ -12,7 +12,7 @@ const options: ApexOptions = {
     type: 'donut',
   },
   colors: ['#3C50E0', '#6577F3', '#8FD0EF', '#0FADCF'],
-  labels: ['web', 'console', 'library', 'Unknown'],
+  labels: ['WebMvcAPP', 'ConsoleApp', 'Classlibrary','WebApiAPP' ],
   legend: {
     show: false,
     position: 'bottom',
@@ -90,7 +90,7 @@ const ChartThree: React.FC = () => {
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> web </span>
+              <span> WebMvcAPP </span>
               <span> 5% </span>
             </p>
           </div>
@@ -99,7 +99,7 @@ const ChartThree: React.FC = () => {
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#6577F3]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> console</span>
+              <span> ConsoleApp</span>
               <span> 1% </span>
             </p>
           </div>
@@ -108,7 +108,7 @@ const ChartThree: React.FC = () => {
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#8FD0EF]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> library </span>
+              <span> Classlibrary </span>
               <span> 82% </span>
             </p>
           </div>
@@ -117,11 +117,12 @@ const ChartThree: React.FC = () => {
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#0FADCF]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Unknown </span>
+              <span> WebApiAPP</span>
               <span> 12% </span>
             </p>
           </div>
         </div>
+
       </div>
     </div>
   );

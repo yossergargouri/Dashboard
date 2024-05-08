@@ -66,9 +66,7 @@ const SignIn: React.FC = () => {
                 <img className="dark:hidden" src={Logo3} alt="Logo" />
               
             
-              <p className="2xl:px-20">
-                {/* ...............;;;;; */}
-              </p>
+            
 
               <span className="mt-15 inline-block">
                 <svg
