@@ -1,5 +1,9 @@
 const SELECTED_SOLUTION_KEY = 'selectedSolutionId';
 const SELECTED_CSPROJ_ID = 'selectedcsprojId';
+const SELECTED_PACKAGE_ID = 'selectedpackageId';
+const SELECTED_REFERENCE_ID = 'selectedreferenceId';
+const SELECTED_PROJECT_ID = 'selectedprojectId';
+
 
 export const setSelectedSolutionId = (solutionId: number) => {
   localStorage.setItem(SELECTED_SOLUTION_KEY, solutionId.toString());
@@ -22,3 +26,20 @@ export const getSelectedCsprojId = (): number | null => {
   console.log('CsprojId retrieved from local storage:', storedId);
   return storedId ? parseInt(storedId, 10) : null;
 };
+export const getSelectedpackageId = (): number | null => {
+  const storedId = localStorage.getItem(SELECTED_PACKAGE_ID);
+  console.log('packagesId retrieved from local storage:', storedId);
+  return storedId ? parseInt(storedId, 10) : null;
+};
+export const getSelectedreferenceId = (): number | null => {
+  const storedId = localStorage.getItem(SELECTED_REFERENCE_ID);
+  console.log('referenceId retrieved from local storage:', storedId);
+  return storedId ? parseInt(storedId, 10) : null;
+};
+
+export const getSelectedprojectId = (): number | null => {
+  const storedId = localStorage.getItem(SELECTED_PROJECT_ID);
+  console.log('projectId retrieved from local storage:', storedId);
+  return storedId ? parseInt(storedId, 10) : null;
+};
+

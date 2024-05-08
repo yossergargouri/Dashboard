@@ -8,6 +8,9 @@
     id: number; 
     name: string;
     version: string;
+    numberOfPackages:number;
+    numberOfReferences:number;
+    numberOfProjects:number;
   }
 
   const TableSln: React.FC = () => {
@@ -48,7 +51,7 @@
     const handleSolutionSelect = (solutionId: number) => {
       setSelectedSolutionId(solutionId);
     };
-    //console.log('yosser houni',tableSolutions[0]?.name);
+
     return (
       <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
         <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
@@ -91,34 +94,35 @@
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                     <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
                       <h5 className="font-medium text-black dark:text-white">
-                        {solution.version}
+                        {solution?.version}
                       </h5>
                     </Link>
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
                       <span className="font-medium text-black dark:text-white">
-                        {}
+                        {solution?.numberOfPackages}
                       </span>
                     </Link>
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
                       <span className="font-medium text-black dark:text-white">
-                        {/* {{} } */}
+                        {solution?.numberOfProjects}
                       </span>
                     </Link>
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
                       <span className="font-medium text-black dark:text-white">
-                        {/* {solution.Name} */}
+                        {solution?.numberOfReferences}
                       </span>
                     </Link>
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <Link to={`/Analyse`} className="block w-full h-full" onClick={() => handleSolutionSelect(solution.id)}>
                       <span className="font-medium text-black dark:text-white">
+                        
                       </span>
                     </Link>
                   </td>

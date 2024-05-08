@@ -2,38 +2,31 @@ import  { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import DefaultLayoutAdm from '../layout/DefaultLayoutAdm';
 import axios from 'axios';
 import Breadcrumb  from '../components/Breadcrumbs/Breadcrumb';
-// import { Admin.service } from '../services/Admin.service';
+import { AdmService } from '../services/Admin.service';
 const Admsettings = () => {
   const [AdmId, setAdmId] = useState<string>('');
   const [formData, setFormData] = useState({
-    id: 1, // Initialiser à 0
+    id: 0, 
     Admname: '',
-
+    confirmPassword: '',
     passwordHash: '',
    
   });
   useEffect(() => {
     const fetchAdmId = async () => {
       try {
-        const loggedInAdmId = await Admsettin
+        const loggedInAdmId = await AdmService.getAdmId();
         setAdmId(loggedInAdmId || '');
       } catch (error) {
         console.error('Error fetching Adm ID:', error);
       }
     };
 
-    fetchAdmId(); // Appeler la fonction une fois au montage du composant
+    fetchAdmId(); 
 
   }, []);
 
-  useEffect(() => {
-    // Mettre à jour l'ID dans formData lors de changements dans AdmId
-    setFormData(prevState => ({
-      ...prevState,
-      id: Number(AdmId)
-    }));
-  }, [AdmId]); // Surveiller les changements de AdmId
-
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -41,12 +34,12 @@ const Admsettings = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:5245/Adm/${formData.id}`, formData);
+      const response = await axios.put(`http://localhost:5245/api/admin/${formData.id}`);
       console.log(response.data);
-      // Traitez la réponse de l'API ici (par exemple, afficher un message de succès)
+
     } catch (error) {
       console.error(error);
-      // Traitez les erreurs de l'API ici (par exemple, afficher un message d'erreur)
+     
     }
   };
   return (
@@ -101,29 +94,14 @@ const Admsettings = () => {
                         <input
                           className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                           type="text"
-                          name="fullName"
                           id="fullName"
                           placeholder="your name"
                           defaultValue=""
+                          name='yourname'
+                          value={formData.Admname}
+                          onChange={handleChange}
                         />
                       </div>
-                    </div>
-
-                    <div className="w-full sm:w-1/2">
-                      <label
-                        className="mb-3 block text-sm font-medium text-black dark:text-white"
-                        htmlFor="phoneNumber"
-                      >
-                        Phone Number
-                      </label>
-                      <input
-                        className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                        type="text"
-                        name="phoneNumber"
-                        id="phoneNumber"
-                        placeholder="+... .. ... ..."
-                        defaultValue=""
-                      />
                     </div>
                   </div>
 
@@ -142,6 +120,25 @@ const Admsettings = () => {
                       placeholder=""
                       defaultValue=""
                       value={formData.passwordHash}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="mb-5.5">
+                    <label
+                      className="mb-3 block text-sm font-medium text-black dark:text-white"
+                      htmlFor="confirmPassword"
+                    >
+                      Confirm password
+                    </label>
+                    <input
+                      className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                      type="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      placeholder=""
+                      defaultValue=""
+                      value={formData.confirmPassword}
                       onChange={handleChange}
                     />
                   </div>

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo3 from '../../images/logo/logo3.svg';
 import Logo from '../../images/logo/logo.svg';
 import axios from 'axios';
+import Alerts from '../UiElements/Alerts';
 
 
 
@@ -24,11 +25,12 @@ const SignUp: React.FC = () => {
   
     // Vérifier si les champs sont vides
     if (!formData.Email || !formData.PasswordHash || !formData.RetypePassword) {
-      // Afficher un message d'erreur ou effectuer une action appropriée
+     
       setPasswordError('All fields are required');
+   
       return;
     }
-  
+    //vérifier si les deux mot de passes sont égaux
     if (formData.PasswordHash !== formData.RetypePassword) {
       setPasswordError('Passwords do not match');
       return;
@@ -37,14 +39,15 @@ const SignUp: React.FC = () => {
     try {
       const response = await axios.post('http://localhost:5245/api/auth/register', formData);
       console.log('Inscription réussie ! Réponse du serveur :', response.data);
-      // Ajoutez ici la logique de redirection ou de notification d'inscription réussie
+
   
       navigate('/auth/signin');
   
     } catch (error) {
       console.error('Erreur lors de l\'inscription:', error);
-      // Ajoutez ici la logique de gestion des erreurs
+  
     }
+    alert(' vous avez déja inscrit, connecter vous')
   };
   
   return (

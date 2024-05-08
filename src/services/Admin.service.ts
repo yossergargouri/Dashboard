@@ -20,17 +20,20 @@ let isLogged = () => {
   let AdmId = localStorage.getItem('AdmId'); 
   return !!token && !!AdmId; 
 }
+let getAdmId = () => {
+  return localStorage.getItem('AdmId');
+
+}
 
 
 
-
-export const accountService = {
+export const AdmService = {
 
 
   saveToken,
   logout,
   isLogged,
-
+  getAdmId 
 }
 
 

@@ -1,10 +1,13 @@
 import  { useEffect, useState } from 'react';
 import { getSelectedCsprojId } from '../../services/solutionSelectionService';
+
 interface Projects{
   id:number;
-  Name:string;
-  Path:string;
+  name:string;
+  path:string;
+  version:string;
 }
+
 const Tableprojectref = () => {
 
   const [tableprojectref, setTableprojectref] = useState<Projects[]>([]);
@@ -14,7 +17,7 @@ const Tableprojectref = () => {
       return;
     }
 
-    fetch(`http://localhost:5245/Projects?projectId=${csprojId}`)
+    fetch(`http://localhost:5245/api/Projects/GetProjectsBycsprojId/${csprojId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -27,15 +30,15 @@ const Tableprojectref = () => {
           setTableprojectref(data);
         } else if (typeof data === 'object') {
           setTableprojectref([data]); // Wrap the object in an array
-        } else {
-          throw new Error('Data is not in expected format');
-        }
+        } 
+         
       })
       .catch((error) => {
         console.error('Error fetching or processing data:', error.message);
         // Handle fetching or processing errors (e.g., display error message)
       });
   }, []);
+
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="max-w-full overflow-x-auto">
@@ -62,13 +65,18 @@ const Tableprojectref = () => {
               <tr key={key}>
                 <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">
-                    {packageItem.Name}
+                    {packageItem.name}
                   </h5>
                   
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                    <p className="text-black dark:text-white">
-                   {packageItem.Name}
+                   {packageItem.path}
+                  </p> 
+                </td>
+                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                   <p className="text-black dark:text-white">
+                   {packageItem?.version}
                   </p> 
                 </td>
               </tr>

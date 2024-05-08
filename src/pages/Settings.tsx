@@ -3,18 +3,16 @@ import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
 import axios from 'axios';
 import { accountService } from '../services/account.service';
-
 const Settings = () => {
   const [userId, setUserId] = useState<string>('');
   const [formData, setFormData] = useState({
-    id: 0, // Initialiser à 0
+    id: 0, 
     username: '',
     email: '',
     passwordHash: '',
     confirmPassword: '',
     telephone: ''
   });
-
   useEffect(() => {
     const fetchUserId = async () => {
       try {
@@ -25,17 +23,17 @@ const Settings = () => {
       }
     };
 
-    fetchUserId(); // Appeler la fonction une fois au montage du composant
+    fetchUserId(); 
 
   }, []);
 
   useEffect(() => {
-    // Mettre à jour l'ID dans formData lors de changements dans userId
+    
     setFormData(prevState => ({
       ...prevState,
       id: Number(userId)
     }));
-  }, [userId]); // Surveiller les changements de userId
+  }, [userId]); 
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -218,6 +216,7 @@ const Settings = () => {
                       onChange={handleChange}
                     />
                   </div>
+                  
 
                   <div className="flex justify-end gap-4.5">
                     <button

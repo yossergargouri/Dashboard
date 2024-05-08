@@ -1,6 +1,98 @@
 import { ApexOptions } from 'apexcharts';
-import React, { useState } from 'react';
+import React, { useState, useEffect, } from 'react';
+import { getSelectedprojectId } from '../../services/solutionSelectionService';
+import { getSelectedreferenceId } from '../../services/solutionSelectionService';
+import { getSelectedpackageId, getSelectedSolutionId } from '../../services/solutionSelectionService';
+
 import ReactApexChart from 'react-apexcharts';
+
+interface ChartTwoState {
+  series:[ {
+    name: string;
+    data: number[];
+    totalpakages?:number;
+    tatalreferences?:number;
+    totalprojects?:number;
+  }];
+}
+
+const Compatibility: React.FC = () => {
+//   const [state, setState] = useState<{ series: ChartTwoState[] }>({
+//     series: [
+//       {
+//         name: 'Compatible',
+//         data: [totalprojects, tatalreferences, totalpakages],
+//         totalpakages: totalpakages, 
+//         totalreferences: tatalreferences,
+//         totalprojects: totalprojects,
+//       },
+//     ],
+//   });
+    // {
+    //    name:  'Incompatible',
+    //    data:[ 10,30,20],
+    // },
+    
+  // }
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const referenceId = getSelectedreferenceId();
+        console.log(referenceId);
+        if (!referenceId) {
+          console.log('Aucune référence sélectionnée.');
+          return;
+        }
+
+        const packageId = getSelectedpackageId();
+        console.log(packageId);
+        if (!packageId) {
+          console.log('Aucun package sélectionné.');
+          return;
+        }
+
+        const projectId = getSelectedprojectId();
+        console.log(projectId);
+        if (!projectId) {
+          console.log('Aucun projet sélectionné.');
+          return;
+        }
+
+
+        const response = await fetch(`http://localhost:5245/api/CsprojFile/GetCsprojFilesBySlnId/${solutionId}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        console.log('Data received:', data);
+        if (Array.isArray(data)) {
+          useState({ series: data });
+        } else if (typeof data === 'object') {
+          useState({ series: [data] }); // Wrap the object in an array
+        }
+      } catch (error) {
+        console.error('Error fetching or processing data:', error);
+        // Handle fetching or processing errors (e.g., display error message)
+      }
+    };
+    const solutionId = getSelectedSolutionId();
+    if (!solutionId) {
+      // Handle case where no solution ID is selected
+      return;
+    }
+
+
+    fetchData();
+  }, []); // Empty dependency array to run only once
+
+  const handleReset = () => {
+    // useState((prevState) => ({
+    //   ...prevState,
+    // }));
+  };
+  handleReset();
 
 const options: ApexOptions = {
   colors: ['#3C50E0', '#80CAEE'],
@@ -62,34 +154,6 @@ const options: ApexOptions = {
   },
 };
 
-interface ChartTwoState {
-  series: {
-    name: string;
-    data: number[];
-  }[];
-}
-
-const Compatibility: React.FC = () => {
-  const [state, setState] = useState<ChartTwoState>({
-    series: [
-      {
-        name: 'Compatible',
-        data: [44, 55, 41, ],
-      },
-      {
-         name:  'Incompatible',
-         data:[ 10,30,20],
-      }
- 
-    ],
-  });
-  
-  const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
-  };
-  handleReset;  
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-6">
@@ -130,7 +194,7 @@ const Compatibility: React.FC = () => {
         <div id="chartTwo" className="-ml-5 -mb-9">
           <ReactApexChart
             options={options}
-            series={state.series}
+            // series={state.series}
             type="bar"
             height={350}
           />
@@ -138,6 +202,5 @@ const Compatibility: React.FC = () => {
       </div>
     </div>
   );
-};
-
+}
 export default Compatibility;

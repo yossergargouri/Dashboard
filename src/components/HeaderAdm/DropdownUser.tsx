@@ -1,39 +1,92 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 import UserOne from '../../images/user/user-01.png';
+import axios from 'axios';
+import { AdmService } from '../../services/Admin.service';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const [AdmId, setAdmId] = useState<string>('');
+  const [Admname, setAdmname] = useState<string>('');
 
-  const trigger = useRef<any>(null);
-  const dropdown = useRef<any>(null);
 
-  // close on click outside
+  useEffect(() => {
+    const fetchAdmId = async () => {
+      const loggedInAdmId = await AdmService.getAdmId();
+      setAdmId(loggedInAdmId || '');
+    };
+    
+    fetchAdmId();
+  }, []);
+
+  useEffect(() => {
+    const fetchAdmData = async () => {
+      try {
+        const response = await axios.get(`api/admin/${AdmId}`);
+
+        if (response.status === 200) {
+          const AdmData = response.data;
+          setAdmname(AdmData.Admname || '');
+        } else {
+          throw new Error('Failed to fetch Adm data');
+        }
+      } catch (error) {
+        console.error('Fetch user data error:', error);
+      }
+    };
+
+    if (AdmId) {
+      fetchAdmData();
+    }
+  }, [AdmId]);
+  const trigger = useRef<HTMLAnchorElement>(null);
+  const dropdown = useRef<HTMLDivElement>(null);
+
+  const logout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        throw new Error('Token not found');
+      }
+
+      const response = await axios.post('http://localhost:5245/api/auth/logout', {
+        token: token
+      });
+
+      if (response.status !== 200) {
+        throw new Error('Logout failed');
+      }
+
+      localStorage.removeItem('token');
+      navigate('/auth/Admsignin');
+      window.location.reload();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || !target || !(target instanceof Node) || dropdown.current.contains(target as Node) || (trigger.current && trigger.current.contains(target as Node))) return;
       setDropdownOpen(false);
     };
+    
     document.addEventListener('click', clickHandler);
     return () => document.removeEventListener('click', clickHandler);
-  });
+  }, [dropdownOpen]);
 
-  // close if the esc key is pressed
   useEffect(() => {
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
-      if (!dropdownOpen || keyCode !== 27) return;
-      setDropdownOpen(false);
+      if (dropdownOpen && keyCode === 27) {
+        setDropdownOpen(false);
+      }
     };
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
-  });
+  }, [dropdownOpen]);
 
   return (
     <div className="relative">
@@ -74,14 +127,14 @@ const DropdownUser = () => {
       {/* <!-- Dropdown Start --> */}
       <div
         ref={dropdown}
-        onFocus={() => setDropdownOpen(true)}
-        onBlur={() => setDropdownOpen(false)}
         className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ${
-          dropdownOpen === true ? 'block' : 'hidden'
+          dropdownOpen ? 'block' : 'hidden'
         }`}
       >
 
-        <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button
+        onClick={logout}
+         className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
           <svg
             className="fill-current"
             width="22"
