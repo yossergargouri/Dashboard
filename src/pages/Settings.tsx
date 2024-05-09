@@ -3,6 +3,8 @@ import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
 import axios from 'axios';
 import { accountService } from '../services/account.service';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/userContext';
 const Settings = () => {
   const [userId, setUserId] = useState<string>('');
   const [formData, setFormData] = useState({
@@ -13,6 +15,8 @@ const Settings = () => {
     confirmPassword: '',
     telephone: ''
   });
+  const {login, user} = useAuth()
+
   useEffect(() => {
     const fetchUserId = async () => {
       try {
@@ -42,8 +46,9 @@ const Settings = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:5245/User/${formData.id}`, formData);
-      console.log(response.data);
+      await axios.put(`http://localhost:5245/User/${formData.id}`, formData).then(() => {
+        login({...user, username: formData.username})
+      });
       // Traitez la réponse de l'API ici (par exemple, afficher un message de succès)
     } catch (error) {
       console.error(error);
@@ -257,9 +262,12 @@ const Settings = () => {
                         <button className="text-sm hover:text-primary">
                           Delete
                         </button>
+                        <Link to ="Netshift">
                         <button className="text-sm hover:text-primary">
                           Update
                         </button>
+                        </Link>
+                        
                       </span>
                     </div>
                   </div>
@@ -312,12 +320,15 @@ const Settings = () => {
                   </div>
 
                   <div className="flex justify-end gap-4.5">
+                    <Link to ="Netshift">
                     <button
                       className="flex justify-center rounded border border-stroke py-2 px-6 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
                       type="submit"
                     >
                       Cancel
                     </button>
+                    </Link>
+                    
                     <button
                       className="flex justify-center rounded bg-primary py-2 px-6 font-medium text-gray hover:bg-opacity-90"
                       type="submit"

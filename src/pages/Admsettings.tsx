@@ -35,6 +35,7 @@ const Admsettings = () => {
     e.preventDefault();
     try {
       const response = await axios.put(`http://localhost:5245/api/admin/${formData.id}`);
+      
       console.log(response.data);
 
     } catch (error) {
@@ -174,7 +175,7 @@ const Admsettings = () => {
                 <form action="#">
                   <div className="mb-4 flex items-center gap-3">
                     <div className="h-14 w-14 rounded-full">
-                      {/* <img src={AdmThree} alt="Adm" /> */}
+                     
                     </div>
                     <div>
                       <span className="mb-1.5 text-black dark:text-white">

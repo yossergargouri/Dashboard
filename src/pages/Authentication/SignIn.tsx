@@ -6,11 +6,13 @@ import axios from 'axios';
 import { accountService } from '../../services/account.service';
 
 import { AlertFailed } from '../UiElements/Alerts';
+import { useAuth } from '../../context/userContext';
   
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const {login} = useAuth()
   const navigate = useNavigate();
   useEffect(() => {
     // Redirige l'utilisateur vers la page principale s'il est déjà connecté
@@ -28,10 +30,8 @@ const SignIn: React.FC = () => {
   
     try {
       const response = await axios.post('http://localhost:5245/api/auth/login', data);
-
+      login(response.data.userData)
       console.log(response.data.userId);
-
-
       
       accountService.saveToken(response.data.token, response.data.userId); // Passer également l'ID de l'utilisateur
 

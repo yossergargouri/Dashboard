@@ -2,43 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UserOne from '../../images/user/user-01.png';
 import axios from 'axios';
-import { accountService } from '../../services/account.service';
+import { useAuth } from '../../context/userContext';
 
 const DropdownUser: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
-  const [userId, setUserId] = useState<string>('');
-  const [Username, setUsername] = useState<string>('');
+  const {user} = useAuth()
 
-  useEffect(() => {
-    const fetchUserId = async () => {
-      const loggedInUserId = await accountService.getUserId();
-      setUserId(loggedInUserId || '');
-    };
 
-    fetchUserId();
-  }, []);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5245/User/${userId}`);
-
-        if (response.status === 200) {
-          const userData = response.data;
-          setUsername(userData.username || '');
-        } else {
-          throw new Error('Failed to fetch user data');
-        }
-      } catch (error) {
-        console.error('Fetch user data error:', error);
-      }
-    };
-
-    if (userId) {
-      fetchUserData();
-    }
-  }, [userId]);
 
   const trigger = useRef<HTMLAnchorElement>(null);
   const dropdown = useRef<HTMLDivElement>(null);
@@ -98,7 +69,7 @@ const DropdownUser: React.FC = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            {Username}
+            {user.username}
           </span>
           
         </span>
