@@ -11,17 +11,16 @@ import axios from 'axios';
 
 
 const NetshiftAdm: React.FC = () => {
-  const [totalUsers, setTotalUsers] = useState<number>(0);
   const [totalSolutions, setTotalSolutions] = useState<number>(0);
-  const [connectedUsers, setConnectedUsers] = useState<number>(0);
+  const [totalUserData, setTotalUserData] = useState<{totalUsers: number, totalConnectedUsers: number}>({totalUsers: 0, totalConnectedUsers: 0});
 
   useEffect(() => {
     const fetchTotalUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:5245/api/Users/Total');
+        const response = await axios.get('http://localhost:5245/User/Totalusers');
         const responseData = response.data;
         console.log("responseData", responseData)
-     // to complete
+       setTotalUserData(response.data);
   } catch (error) {
         console.error('Error fetching total users:', error);
       }
@@ -50,7 +49,7 @@ const NetshiftAdm: React.FC = () => {
     <DefaultLayoutAdm>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 2xl:gap-7.5">
         
-      <CardDataStats title="Total Users" total ={totalUsers.toString()} >
+      <CardDataStats title="Total Users" total ={totalUserData.totalUsers} >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -73,10 +72,10 @@ const NetshiftAdm: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Solutions" total={totalSolutions.toString()}>
+        <CardDataStats title="Total Solutions" total={totalSolutions}>
         <img src={fiLE} width={20} height={20} alt="Logo" />
         </CardDataStats>
-        <CardDataStats title="Total connected users " total={"0"} >
+        <CardDataStats title="Total connected users " total={totalUserData.totalConnectedUsers} >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
